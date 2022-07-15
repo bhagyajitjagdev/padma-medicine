@@ -1,1 +1,95 @@
-<p>add-inventory works!</p>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="createInventory()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Batch Code</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzValidatingTip="Validating..." [nzErrorTip]="batchCodeErrorTpl">
+      <input nzSize="large" nz-input formControlName="batchCode" placeholder="Enter Batch Code" />
+      <ng-template #batchCodeErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please enter your Batch Code!</ng-container>
+        <ng-container *ngIf="control.hasError('duplicated')">This Batch Code already exists!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Medicine</nz-form-label>
+    <nz-form-control [nzSpan]="12" [nzErrorTip]="medicineErrorTpl">
+      <input
+        class="w-full mb-3"
+        placeholder="Select Medicine"
+        formControlName="medicine"
+        nz-input
+        (ngModelChange)="onMedicineSearch($event)"
+        [nzAutocomplete]="auto"
+        nzSize="large"
+      />
+      <nz-autocomplete #auto>
+        <nz-auto-option *ngFor="let med of medicine" [nzValue]="med.name">{{ med.name }}</nz-auto-option>
+      </nz-autocomplete>
+
+      <ng-template #medicineErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please select / enter a medicine name</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Quantity</nz-form-label>
+    <nz-form-control [nzSpan]="12" [nzErrorTip]="quantityErrorTpl">
+      <input nzSize="large" formControlName="quantity" nz-input placeholder="Quantity" />
+      <ng-template #quantityErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please enter the quantity!</ng-container>
+        <ng-container *ngIf="control.hasError('number')">The quantity needs to be a positive number!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Price</nz-form-label>
+    <nz-form-control [nzSpan]="12" [nzErrorTip]="priceErrorTpl">
+      <input nzSize="large" formControlName="price" nz-input placeholder="Price" />
+      <ng-template #priceErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please enter the price!</ng-container>
+        <ng-container *ngIf="control.hasError('number')">The price needs to be a positive number!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="7" nzRequired>Date Of Purchase</nz-form-label>
+    <nz-form-control [nzSm]="12" [nzErrorTip]="dateOfPurchaseErrorTpl">
+      <nz-date-picker
+        nzFormat="dd/MM/yyyy"
+        class="w-full"
+        nzSize="large"
+        formControlName="dateOfPurchase"
+        placeholder="Date of Purchase"
+      ></nz-date-picker>
+      <ng-template #dateOfPurchaseErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please select a date!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="7" nzRequired>Expiry Date</nz-form-label>
+    <nz-form-control [nzSm]="12" [nzErrorTip]="expireDateErrorTpl">
+      <nz-date-picker
+        nzFormat="MM/yyyy"
+        class="w-full"
+        nzMode="month"
+        nzSize="large"
+        formControlName="expireDate"
+        placeholder="Expiry Date"
+      ></nz-date-picker>
+      <ng-template #expireDateErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please select a date!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control [nzOffset]="7" [nzSpan]="12">
+      <button class="mr-1" nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button>
+      <button nz-button (click)="resetForm($event)">Reset</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

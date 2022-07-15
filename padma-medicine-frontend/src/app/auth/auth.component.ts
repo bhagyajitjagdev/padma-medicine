@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { APIService } from '../services/api.service';
+import { Component, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
+import { APIService } from "../services/api.service";
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css'],
+  selector: "app-auth",
+  templateUrl: "./auth.component.html",
+  styleUrls: ["./auth.component.css"],
 })
 export class AuthComponent implements OnInit {
-  isCollapsed = false;
+  isCollapsed = true;
 
   spinner: any = false;
   spinSubscription: Subscription | undefined;

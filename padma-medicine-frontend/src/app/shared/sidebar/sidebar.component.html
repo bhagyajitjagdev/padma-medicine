@@ -1,23 +1,59 @@
 <ul nz-menu nzTheme="light" nzMode="inline">
   <!-- <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
     <ul> -->
-  <li nz-menu-item nzMatchRouter>
+  <li
+    nz-menu-item
+    nzMatchRouter
+    nz-tooltip
+    nzTooltipTitle="Home"
+    nzTooltipPlacement="right"
+    [nzTooltipMouseEnterDelay]="0.5"
+  >
     <i nz-icon nzType="home" nzTheme="outline"></i>
     <a routerLink="/auth/dashboard">Home</a>
   </li>
-  <li nz-menu-item nzMatchRouter>
-    <i nz-icon nzType="file-excel" nzTheme="outline"></i>
+  <li
+    nz-menu-item
+    nzMatchRouter
+    nz-tooltip
+    nzTooltipTitle="Inventory"
+    nzTooltipPlacement="right"
+    [nzTooltipMouseEnterDelay]="0.5"
+  >
+    <i nz-icon nzType="database" nzTheme="outline"></i>
     <a routerLink="/auth/inventory">Inventory</a>
   </li>
-  <li nz-menu-item nzMatchRouter>
-    <i nz-icon nzType="user" nzTheme="outline"></i>
+  <li
+    nz-menu-item
+    nzMatchRouter
+    nz-tooltip
+    nzTooltipTitle="Sales"
+    nzTooltipPlacement="right"
+    [nzTooltipMouseEnterDelay]="0.5"
+  >
+    <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>
     <a routerLink="/auth/sale">Sales</a>
   </li>
-  <li nz-menu-item nzMatchRouter>
-    <i nz-icon nzType="user" nzTheme="outline"></i>
+  <li
+    nz-menu-item
+    nzMatchRouter
+    nz-tooltip
+    nzTooltipTitle="Medicine"
+    nzTooltipPlacement="right"
+    [nzTooltipMouseEnterDelay]="0.5"
+  >
+    <i nz-icon nzType="disconnect" nzTheme="outline"></i>
     <a routerLink="/auth/medicine">Medicine</a>
   </li>
-  <li nz-menu-item nzMatchRouter>
+  <li
+    nz-menu-item
+    nzMatchRouter
+    nz-tooltip
+    nzTooltipTitle="Logout"
+    nzTooltipPlacement="right"
+    [nzTooltipMouseEnterDelay]="0.5"
+    nzTooltipColor="red"
+  >
     <i nz-icon nzType="logout" nzTheme="outline"></i>
     <a (click)="logout()">Logout</a>
   </li>

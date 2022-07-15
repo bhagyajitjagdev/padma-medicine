@@ -1,11 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { APIService } from 'src/app/services/api.service';
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Subscription } from "rxjs";
+import { APIService } from "src/app/services/api.service";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.css"],
 })
 export class HeaderComponent implements OnInit {
   constructor(private control: APIService) {}

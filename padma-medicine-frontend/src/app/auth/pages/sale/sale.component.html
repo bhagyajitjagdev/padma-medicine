@@ -4,11 +4,7 @@
       <h1 class="font-bold text-lg mb-3">Search for items</h1>
       <h3 class="mb-3">Type batch, medicine name</h3>
       <div class="mb-6">
-        <nz-input-group
-          nzSize="large"
-          class="rounded-lg"
-          [nzSuffix]="suffixTemplate0"
-        >
+        <nz-input-group nzSize="large" class="rounded-lg" [nzSuffix]="suffixTemplate0">
           <input
             type="text"
             nz-input
@@ -65,11 +61,7 @@
           (nzOnSearch)="onSearch($event)"
         >
           <ng-container *ngFor="let med of medicine">
-            <nz-option
-              *ngIf="!isLoading"
-              [nzValue]="med.medicineCode"
-              [nzLabel]="med.name"
-            ></nz-option>
+            <nz-option *ngIf="!isLoading" [nzValue]="med.medicineCode" [nzLabel]="med.name"></nz-option>
           </ng-container>
           <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
             <i nz-icon nzType="loading" class="loading-icon"></i>
@@ -80,15 +72,7 @@
 
       <div class="col-span-1">
         <div class="w-full justify-between flex">
-          <button
-            nz-button
-            class="w-4/5"
-            nzType="default"
-            nzSize="large"
-            (click)="applyFilter()"
-          >
-            Apply
-          </button>
+          <button nz-button class="w-4/5" nzType="default" nzSize="large" (click)="applyFilter()">Apply</button>
           <button
             nz-tooltip
             nzTooltipTitle="Reset"
@@ -106,20 +90,10 @@
     <div class="flex justify-between mb-6">
       <nz-range-picker
         nz-tooltip
-        nzTooltipTitle="Date of Purchase"
+        nzTooltipTitle="Sold Date"
         nzSize="large"
         class="w-full"
-        [(ngModel)]="dateOfPurchase"
-      ></nz-range-picker>
-
-      <div class="w-4"></div>
-
-      <nz-range-picker
-        nz-tooltip
-        nzTooltipTitle="Expiry Date"
-        nzSize="large"
-        class="w-full"
-        [(ngModel)]="expireDate"
+        [(ngModel)]="soldDate"
       ></nz-range-picker>
     </div>
 
@@ -148,11 +122,7 @@
         <ng-container *ngFor="let data of nzTable.data">
           <tr>
             <td>{{ data.saleCode }}</td>
-            <td
-              nzEllipsis
-              nz-tooltip
-              [nzTooltipTitle]="data?.inventory?.medicine.name"
-            >
+            <td nzEllipsis nz-tooltip [nzTooltipTitle]="data?.inventory?.medicine.name">
               {{ data?.inventory?.medicine.name }}
             </td>
             <td>{{ data.saleQuantity }}</td>
@@ -178,22 +148,13 @@
                   <i nz-icon nzType="delete"></i>
                 </button>
               </ng-template>
-              <nz-descriptions
-                [nzTitle]="data?.inventory?.medicine.name"
-                [nzExtra]="deleteSale"
-              >
-                <nz-descriptions-item nzTitle="Sold Quantity">{{
-                  data.saleQuantity
-                }}</nz-descriptions-item>
+              <nz-descriptions [nzTitle]="data?.inventory?.medicine.name" [nzExtra]="deleteSale">
+                <nz-descriptions-item nzTitle="Sold Quantity">{{ data.saleQuantity }}</nz-descriptions-item>
                 <nz-descriptions-item nzTitle="Sold At">
                   {{ data.createdAt | date: "MMM d, y, h:mm a" }}
                 </nz-descriptions-item>
-                <nz-descriptions-item nzTitle="Invoice No.">{{
-                  data.saleCode
-                }}</nz-descriptions-item>
-                <nz-descriptions-item nzTitle="Batch Code">{{
-                  data?.inventory.batchCode
-                }}</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Invoice No.">{{ data.saleCode }}</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Batch Code">{{ data?.inventory.batchCode }}</nz-descriptions-item>
                 <nz-descriptions-item nzTitle="Date of Expiry">
                   {{ data.inventory.expireDate | date: "MMM, y" }}
                 </nz-descriptions-item>

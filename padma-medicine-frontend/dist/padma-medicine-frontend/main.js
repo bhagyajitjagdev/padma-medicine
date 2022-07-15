@@ -759,13 +759,13 @@ class APIService {
         this.downloadURL = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.downloadURL;
         this.spinner = new rxjs__WEBPACK_IMPORTED_MODULE_1__.Subject();
         this.params = {};
-        this.dateFormat = 'd MMM y';
-        this.dateTimeFormat = 'd MMM y h:mm a';
+        this.dateFormat = "d MMM y";
+        this.dateTimeFormat = "d MMM y h:mm a";
         this.capitalize = (s) => s
             .toLowerCase()
-            .split(' ')
+            .split(" ")
             .map((v) => v.charAt(0).toUpperCase() + v.slice(1))
-            .join(' ');
+            .join(" ");
         router.events.subscribe((val) => {
             this.params = this.queryParams();
         });
@@ -796,21 +796,21 @@ class APIService {
         });
         return obj;
     }
-    openNotification(message, type = 'success') {
+    openNotification(message, type = "success") {
         this.notification.create(type, this.capitalize(message));
     }
     get loggedIn() {
-        return localStorage.getItem('padma-token') !== null;
+        return localStorage.getItem("padma-token") !== null;
     }
     get token() {
-        return localStorage.getItem('padma-token') || '';
+        return localStorage.getItem("padma-token") || "";
     }
     get userData() {
-        return JSON.parse(localStorage.getItem('padma-user') || '');
+        return JSON.parse(localStorage.getItem("padma-user") || "");
     }
     setUserData(user) {
         user.name = this.capitalize(`${user.firstName} ${user.lastName}`);
-        localStorage.setItem('padma-user', JSON.stringify(user));
+        localStorage.setItem("padma-user", JSON.stringify(user));
         window.location.reload();
     }
     get UploadURL() {
@@ -821,13 +821,13 @@ class APIService {
     }
     fileUpload(payload) {
         const formData = new FormData();
-        formData.append('file', payload);
+        formData.append("file", payload);
         return this.http.post(`${this.baseUrl}/file/upload`, payload);
     }
     logout() {
-        localStorage.removeItem('padma-token');
-        localStorage.removeItem('padma-user');
-        this.router.navigate(['/login']);
+        localStorage.removeItem("padma-token");
+        localStorage.removeItem("padma-user");
+        this.router.navigate(["/login"]);
     }
     getInventory(params) {
         return this.http.get(`${this.baseUrl}/inventory`, {
@@ -838,6 +838,12 @@ class APIService {
         return this.http.get(`${this.baseUrl}/medicine`, {
             params: params,
         });
+    }
+    createMedicine(body) {
+        return this.http.post(`${this.baseUrl}/medicine`, body);
+    }
+    createInventory(body) {
+        return this.http.post(`${this.baseUrl}/inventory`, body);
     }
     updateInventory(inventoryCode, body) {
         return this.http.put(`${this.baseUrl}/inventory/${inventoryCode}`, body);
@@ -855,7 +861,7 @@ class APIService {
     }
 }
 APIService.ɵfac = function APIService_Factory(t) { return new (t || APIService)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](ng_zorro_antd_message__WEBPACK_IMPORTED_MODULE_4__.NzMessageService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__.ActivatedRoute)); };
-APIService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({ token: APIService, factory: APIService.ɵfac, providedIn: 'root' });
+APIService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({ token: APIService, factory: APIService.ɵfac, providedIn: "root" });
 
 
 /***/ }),

@@ -4,11 +4,7 @@
       <h1 class="font-bold text-lg mb-3">Search for items</h1>
       <h3 class="mb-3">Type batch, medicine name</h3>
       <div class="mb-6">
-        <nz-input-group
-          nzSize="large"
-          class="rounded-lg"
-          [nzSuffix]="suffixTemplate0"
-        >
+        <nz-input-group nzSize="large" class="rounded-lg" [nzSuffix]="suffixTemplate0">
           <input
             type="text"
             nz-input
@@ -71,10 +67,7 @@
             </nz-card>
           </div>
           <div *ngIf="!inventoryExpiryNextMonth.length">
-            <nz-empty
-              class="bg-background pb-4 mt-8"
-              nzNotFoundImage="simple"
-            ></nz-empty>
+            <nz-empty class="bg-background pb-4 mt-8" nzNotFoundImage="simple"></nz-empty>
           </div>
         </nz-tab>
         <nz-tab [nzTitle]="tabs[1]">
@@ -88,10 +81,7 @@
           </div>
 
           <div *ngIf="!last5Sales.length">
-            <nz-empty
-              class="bg-background pb-4 mt-8"
-              nzNotFoundImage="simple"
-            ></nz-empty>
+            <nz-empty class="bg-background pb-4 mt-8" nzNotFoundImage="simple"></nz-empty>
           </div>
         </nz-tab>
       </nz-tabset>
@@ -111,11 +101,7 @@
           (nzOnSearch)="onSearch($event)"
         >
           <ng-container *ngFor="let med of medicine">
-            <nz-option
-              *ngIf="!isLoading"
-              [nzValue]="med.medicineCode"
-              [nzLabel]="med.name"
-            ></nz-option>
+            <nz-option *ngIf="!isLoading" [nzValue]="med.medicineCode" [nzLabel]="med.name"></nz-option>
           </ng-container>
           <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
             <i nz-icon nzType="loading" class="loading-icon"></i>
@@ -147,25 +133,16 @@
       <div class="col-span-1">
         <button
           class="flex w-full justify-center items-center mb-3"
-          nz-tooltip
-          nzTooltipTitle="Add New Inventory"
           nz-button
           nzType="primary"
           nzSize="large"
+          (click)="openAddInventoryModal()"
         >
           Add Inventory
         </button>
 
         <div class="w-full justify-between flex">
-          <button
-            nz-button
-            class="w-4/5"
-            nzType="default"
-            nzSize="large"
-            (click)="applyFilter()"
-          >
-            Apply
-          </button>
+          <button nz-button class="w-4/5" nzType="default" nzSize="large" (click)="applyFilter()">Apply</button>
           <button
             nz-tooltip
             nzTooltipTitle="Reset"
@@ -212,13 +189,7 @@
             <td>{{ data.quantity }}</td>
             <td>{{ data.expireDate | date: "MMM, y" }}</td>
             <td class="text-center">
-              <button
-                class="mt-1"
-                nz-button
-                nzType="primary"
-                nzSize="small"
-                (click)="openSellInventoryModal(data)"
-              >
+              <button class="mt-1" nz-button nzType="primary" nzSize="small" (click)="openSellInventoryModal(data)">
                 <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>
               </button>
             </td>
@@ -242,22 +213,13 @@
                   <i nz-icon nzType="delete"></i>
                 </button>
               </ng-template>
-              <nz-descriptions
-                [nzTitle]="data?.medicine.name"
-                [nzExtra]="deleteInventory"
-              >
-                <nz-descriptions-item nzTitle="Bought Quantity">{{
-                  data.boughtQuantity
-                }}</nz-descriptions-item>
+              <nz-descriptions [nzTitle]="data?.medicine.name" [nzExtra]="deleteInventory">
+                <nz-descriptions-item nzTitle="Bought Quantity">{{ data.boughtQuantity }}</nz-descriptions-item>
                 <nz-descriptions-item nzTitle="Date of Purchase">
                   {{ data.dateOfPurchase | date }}
                 </nz-descriptions-item>
-                <nz-descriptions-item nzTitle="Batch Code">{{
-                  data.batchCode
-                }}</nz-descriptions-item>
-                <nz-descriptions-item nzTitle="Current Quantity">{{
-                  data.quantity
-                }}</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Batch Code">{{ data.batchCode }}</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Current Quantity">{{ data.quantity }}</nz-descriptions-item>
                 <nz-descriptions-item nzTitle="Date of Expiry">
                   {{ data.expireDate | date: "MMM, y" }}
                 </nz-descriptions-item>
@@ -283,21 +245,13 @@
   nzWidth="45vw"
 >
   <ng-template #modalTitleSellInventory
-    >{{ tryingToSellInventory?.medicine?.name }} -
-    {{ tryingToSellInventory?.batchCode }}</ng-template
+    >{{ tryingToSellInventory?.medicine?.name }} - {{ tryingToSellInventory?.batchCode }}</ng-template
   >
 
   <ng-template #modalContentSellInventory>
-    <nz-descriptions
-      [nzColumn]="2"
-      [nzTitle]="tryingToSellInventory?.medicine?.name"
-    >
-      <nz-descriptions-item nzTitle="Bought Quantity">{{
-        tryingToSellInventory?.boughtQuantity
-      }}</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="Current Quantity">{{
-        tryingToSellInventory?.quantity
-      }}</nz-descriptions-item>
+    <nz-descriptions [nzColumn]="2" [nzTitle]="tryingToSellInventory?.medicine?.name">
+      <nz-descriptions-item nzTitle="Bought Quantity">{{ tryingToSellInventory?.boughtQuantity }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Current Quantity">{{ tryingToSellInventory?.quantity }}</nz-descriptions-item>
 
       <nz-descriptions-item nzTitle="Date of Purchase">
         {{ tryingToSellInventory?.dateOfPurchase | date }}
@@ -306,9 +260,7 @@
         {{ tryingToSellInventory?.expireDate | date: "MMM, y" }}
       </nz-descriptions-item>
 
-      <nz-descriptions-item nzTitle="Batch Code">{{
-        tryingToSellInventory?.batchCode
-      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Batch Code">{{ tryingToSellInventory?.batchCode }}</nz-descriptions-item>
       <nz-descriptions-item nzTitle="Expires In">
         {{ subtractDate(tryingToSellInventory?.expireDate) }}
         Day(s)
@@ -324,11 +276,7 @@
           <nz-form-item>
             <nz-form-control nzErrorTip="Invalid Value">
               <nz-input-group nzPrefixIcon="pie-chart">
-                <input
-                  formControlName="saleQuantity"
-                  nz-input
-                  placeholder="Sell Quantity"
-                />
+                <input formControlName="saleQuantity" nz-input placeholder="Sell Quantity" />
               </nz-input-group>
             </nz-form-control>
           </nz-form-item>
@@ -345,11 +293,7 @@
           <nz-form-item>
             <nz-form-control nzErrorTip="Invalid Value">
               <nz-input-group nzPrefixIcon="money-collect">
-                <input
-                  formControlName="salePrice"
-                  nz-input
-                  placeholder="Sell Price"
-                />
+                <input formControlName="salePrice" nz-input placeholder="Sell Price" />
               </nz-input-group>
             </nz-form-control>
           </nz-form-item>
@@ -359,11 +303,7 @@
   </ng-template>
 
   <ng-template #modalFooterSellInventory>
-    <button nz-button nzType="default" (click)="handleCancelSellInventory()">
-      Cancel
-    </button>
-    <button nz-button nzType="primary" (click)="handleOkSellInventory()">
-      Submit
-    </button>
+    <button nz-button nzType="default" (click)="handleCancelSellInventory()">Cancel</button>
+    <button nz-button nzType="primary" (click)="handleOkSellInventory()">Submit</button>
   </ng-template>
 </nz-modal>

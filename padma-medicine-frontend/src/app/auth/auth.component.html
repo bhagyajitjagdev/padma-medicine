@@ -1,24 +1,21 @@
-<app-header
-  style="position: fixed; width: 100%; z-index: 5"
-  (fromChildCollapse)="changeCollapsed($event)"
-></app-header>
+<app-header style="position: fixed; width: 100%; z-index: 5" (fromChildCollapse)="changeCollapsed($event)"></app-header>
 <nz-layout class="app-layout">
   <nz-sider
     class="menu-sidebar"
     nzCollapsible
     style="position: fixed; height: 100%; margin-top: 64px"
-    nzWidth="250px"
+    nzWidth="55px"
     nzBreakpoint="md"
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null"
-    [nzCollapsedWidth]="55"
+    [nzCollapsedWidth]="250"
   >
     <app-sidebar></app-sidebar>
   </nz-sider>
   <nz-layout
     style="margin-top: 64px"
     [style]="{
-      'margin-left': isCollapsed ? '55px' : '250px'
+      'margin-left': !isCollapsed ? '55px' : '250px'
     }"
   >
     <nz-content>

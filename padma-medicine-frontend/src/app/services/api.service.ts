@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { Subject } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { ActivatedRoute, NavigationStart, Router } from "@angular/router";
+import { NzMessageService } from "ng-zorro-antd/message";
+import { Subject } from "rxjs";
+import { environment } from "src/environments/environment";
 
 interface ResApi {
   code: any;
@@ -16,7 +16,7 @@ type obj = {
 };
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class APIService {
   private baseUrl = environment.baseURL;
@@ -27,15 +27,15 @@ export class APIService {
 
   private params: any = {};
 
-  private dateFormat: string = 'd MMM y';
-  private dateTimeFormat: string = 'd MMM y h:mm a';
+  private dateFormat: string = "d MMM y";
+  private dateTimeFormat: string = "d MMM y h:mm a";
 
   capitalize = (s: string) =>
     s
       .toLowerCase()
-      .split(' ')
+      .split(" ")
       .map((v) => v.charAt(0).toUpperCase() + v.slice(1))
-      .join(' ');
+      .join(" ");
 
   constructor(
     private http: HttpClient,
@@ -83,25 +83,25 @@ export class APIService {
     return obj;
   }
 
-  openNotification(message: string, type = 'success'): void {
+  openNotification(message: string, type = "success"): void {
     this.notification.create(type, this.capitalize(message));
   }
 
   public get loggedIn(): boolean {
-    return localStorage.getItem('padma-token') !== null;
+    return localStorage.getItem("padma-token") !== null;
   }
 
   public get token(): string {
-    return localStorage.getItem('padma-token') || '';
+    return localStorage.getItem("padma-token") || "";
   }
 
   public get userData(): object {
-    return JSON.parse(localStorage.getItem('padma-user') || '');
+    return JSON.parse(localStorage.getItem("padma-user") || "");
   }
 
   setUserData(user: any) {
     user.name = this.capitalize(`${user.firstName} ${user.lastName}`);
-    localStorage.setItem('padma-user', JSON.stringify(user));
+    localStorage.setItem("padma-user", JSON.stringify(user));
     window.location.reload();
   }
 
@@ -114,14 +114,14 @@ export class APIService {
 
   fileUpload(payload: any) {
     const formData = new FormData();
-    formData.append('file', payload);
+    formData.append("file", payload);
     return this.http.post<ResApi>(`${this.baseUrl}/file/upload`, payload);
   }
 
   logout() {
-    localStorage.removeItem('padma-token');
-    localStorage.removeItem('padma-user');
-    this.router.navigate(['/login']);
+    localStorage.removeItem("padma-token");
+    localStorage.removeItem("padma-user");
+    this.router.navigate(["/login"]);
   }
 
   getInventory(params?: any) {
@@ -136,11 +136,16 @@ export class APIService {
     });
   }
 
+  createMedicine(body: any) {
+    return this.http.post<ResApi>(`${this.baseUrl}/medicine`, body);
+  }
+
+  createInventory(body: any) {
+    return this.http.post<ResApi>(`${this.baseUrl}/inventory`, body);
+  }
+
   updateInventory(inventoryCode: string, body: any) {
-    return this.http.put<ResApi>(
-      `${this.baseUrl}/inventory/${inventoryCode}`,
-      body
-    );
+    return this.http.put<ResApi>(`${this.baseUrl}/inventory/${inventoryCode}`, body);
   }
 
   getSale(params?: any) {

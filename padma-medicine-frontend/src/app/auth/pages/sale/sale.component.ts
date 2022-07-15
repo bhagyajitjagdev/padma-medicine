@@ -1,32 +1,20 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as moment from 'moment';
-import { NzTableQueryParams } from 'ng-zorro-antd/table';
-import {
-  BehaviorSubject,
-  Observable,
-  catchError,
-  of,
-  map,
-  debounceTime,
-  switchMap,
-} from 'rxjs';
-import { APIService } from 'src/app/services/api.service';
+import { HttpClient } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import * as moment from "moment";
+import { NzTableQueryParams } from "ng-zorro-antd/table";
+import { BehaviorSubject, Observable, catchError, of, map, debounceTime, switchMap } from "rxjs";
+import { APIService } from "src/app/services/api.service";
 
 @Component({
-  selector: 'app-sale',
-  templateUrl: './sale.component.html',
-  styleUrls: ['./sale.component.css'],
+  selector: "app-sale",
+  templateUrl: "./sale.component.html",
+  styleUrls: ["./sale.component.css"],
 })
 export class SaleComponent implements OnInit {
-  constructor(
-    private http: HttpClient,
-    private control: APIService,
-    private fb: FormBuilder
-  ) {}
+  constructor(private http: HttpClient, private control: APIService, private fb: FormBuilder) {}
 
-  searchChange$ = new BehaviorSubject('');
+  searchChange$ = new BehaviorSubject("");
   medicine: any[] = [];
   selectedMedicine?: string;
   isLoading = false;
@@ -48,13 +36,13 @@ export class SaleComponent implements OnInit {
 
   filter: any = {};
 
-  expireDate: any;
-  dateOfPurchase: any;
-  searchSale: string = '';
+  soldDate: any;
+
+  searchSale: string = "";
 
   expandSet = new Set<string>();
 
-  tabs = ['Today', 'Last 7 Days', 'Last 30 Days'];
+  tabs = ["Today", "Last 7 Days", "Last 30 Days"];
 
   ngOnInit(): void {
     this.getMedicine();
@@ -100,11 +88,11 @@ export class SaleComponent implements OnInit {
           this.sale = res.result.rows;
           this.totalSale = res.result.totalCount;
         } else {
-          return this.control.openNotification(res.message, 'error');
+          return this.control.openNotification(res.message, "error");
         }
       },
       error: ({ error: res }) => {
-        return this.control.openNotification(res.message, 'error');
+        return this.control.openNotification(res.message, "error");
       },
     });
   }
@@ -119,29 +107,15 @@ export class SaleComponent implements OnInit {
     this.filter = {};
 
     if (!reset) {
-      if (this.selectedMedicine)
-        this.filter.medicineCode = this.selectedMedicine;
-      if (this.expireDate && this.expireDate.length) {
-        this.filter.expireDateFrom = moment(this.expireDate[0]).format(
-          'YYYY-MM-DD'
-        );
-        this.filter.expireDateTo = moment(this.expireDate[1]).format(
-          'YYYY-MM-DD'
-        );
-      }
-      if (this.dateOfPurchase && this.dateOfPurchase.length) {
-        this.filter.dateOfPurchaseFrom = moment(this.dateOfPurchase[0]).format(
-          'YYYY-MM-DD'
-        );
-        this.filter.dateOfPurchaseTo = moment(this.dateOfPurchase[1]).format(
-          'YYYY-MM-DD'
-        );
+      if (this.selectedMedicine) this.filter.medicineCode = this.selectedMedicine;
+      if (this.soldDate && this.soldDate.length) {
+        this.filter.soldFrom = moment(this.soldDate[0]).format("YYYY-MM-DD");
+        this.filter.soldTo = moment(this.soldDate[1]).format("YYYY-MM-DD");
       }
     } else {
-      this.selectedMedicine = '';
-      this.searchSale = '';
-      this.expireDate = [];
-      this.dateOfPurchase = [];
+      this.selectedMedicine = "";
+      this.searchSale = "";
+      this.soldDate = [];
     }
 
     this.pageSize = 10;
@@ -153,8 +127,8 @@ export class SaleComponent implements OnInit {
   getMonthSale() {
     this.control
       .getSale({
-        soldFrom: moment().subtract(29, 'd').format('YYYY-MM-DD'),
-        soldTo: moment().add(1, 'd').format('YYYY-MM-DD'),
+        soldFrom: moment().subtract(29, "d").format("YYYY-MM-DD"),
+        soldTo: moment().add(1, "d").format("YYYY-MM-DD"),
         limit: 999999,
       })
       .subscribe({
@@ -166,11 +140,11 @@ export class SaleComponent implements OnInit {
               0
             );
           } else {
-            return this.control.openNotification(res.message, 'error');
+            return this.control.openNotification(res.message, "error");
           }
         },
         error: ({ error: res }) => {
-          return this.control.openNotification(res.message, 'error');
+          return this.control.openNotification(res.message, "error");
         },
       });
   }
@@ -178,8 +152,8 @@ export class SaleComponent implements OnInit {
   getWeekSale() {
     this.control
       .getSale({
-        soldFrom: moment().subtract(6, 'd').format('YYYY-MM-DD'),
-        soldTo: moment().add(1, 'd').format('YYYY-MM-DD'),
+        soldFrom: moment().subtract(6, "d").format("YYYY-MM-DD"),
+        soldTo: moment().add(1, "d").format("YYYY-MM-DD"),
         limit: 999999,
       })
       .subscribe({
@@ -191,11 +165,11 @@ export class SaleComponent implements OnInit {
               0
             );
           } else {
-            return this.control.openNotification(res.message, 'error');
+            return this.control.openNotification(res.message, "error");
           }
         },
         error: ({ error: res }) => {
-          return this.control.openNotification(res.message, 'error');
+          return this.control.openNotification(res.message, "error");
         },
       });
   }
@@ -203,8 +177,8 @@ export class SaleComponent implements OnInit {
   getTodaySale() {
     this.control
       .getSale({
-        soldFrom: moment().format('YYYY-MM-DD'),
-        soldTo: moment().add(1, 'd').format('YYYY-MM-DD'),
+        soldFrom: moment().format("YYYY-MM-DD"),
+        soldTo: moment().add(1, "d").format("YYYY-MM-DD"),
         limit: 999999,
       })
       .subscribe({
@@ -216,11 +190,11 @@ export class SaleComponent implements OnInit {
               0
             );
           } else {
-            return this.control.openNotification(res.message, 'error');
+            return this.control.openNotification(res.message, "error");
           }
         },
         error: ({ error: res }) => {
-          return this.control.openNotification(res.message, 'error');
+          return this.control.openNotification(res.message, "error");
         },
       });
   }
@@ -250,11 +224,11 @@ export class SaleComponent implements OnInit {
           this.ngOnInit();
           return this.control.openNotification(res.message);
         } else {
-          return this.control.openNotification(res.message, 'error');
+          return this.control.openNotification(res.message, "error");
         }
       },
       error: ({ error: res }) => {
-        return this.control.openNotification(res.message, 'error');
+        return this.control.openNotification(res.message, "error");
       },
     });
   }

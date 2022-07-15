@@ -16,6 +16,7 @@ const InventorySchema = new mongoose.Schema(
     expireDate: { type: Date, require: true },
     price: { type: Number, require: true },
     dateOfPurchase: { type: Date, require: true },
+    isReturned: { type: Boolean, default: false },
     isDeleted: { type: Boolean, default: false },
   },
   { timestamps: true }

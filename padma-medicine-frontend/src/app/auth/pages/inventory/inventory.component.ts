@@ -1,34 +1,29 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as moment from 'moment';
-import { NzTableQueryParams } from 'ng-zorro-antd/table/src/table.types';
-import {
-  BehaviorSubject,
-  catchError,
-  debounceTime,
-  map,
-  Observable,
-  of,
-  switchMap,
-} from 'rxjs';
-import { APIService } from 'src/app/services/api.service';
-import { Clipboard } from '@angular/cdk/clipboard';
+import { HttpClient } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import * as moment from "moment";
+import { NzTableQueryParams } from "ng-zorro-antd/table/src/table.types";
+import { BehaviorSubject, catchError, debounceTime, map, Observable, of, switchMap } from "rxjs";
+import { APIService } from "src/app/services/api.service";
+import { Clipboard } from "@angular/cdk/clipboard";
+import { NzModalService } from "ng-zorro-antd/modal";
+import { AddInventoryComponent } from "../../component/add-inventory/add-inventory.component";
 
 @Component({
-  selector: 'app-inventory',
-  templateUrl: './inventory.component.html',
-  styleUrls: ['./inventory.component.css'],
+  selector: "app-inventory",
+  templateUrl: "./inventory.component.html",
+  styleUrls: ["./inventory.component.css"],
 })
 export class InventoryComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private control: APIService,
     private fb: FormBuilder,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    private modalService: NzModalService
   ) {}
 
-  searchChange$ = new BehaviorSubject('');
+  searchChange$ = new BehaviorSubject("");
   medicine: any[] = [];
   selectedMedicine?: string;
   isLoading = false;
@@ -45,7 +40,7 @@ export class InventoryComponent implements OnInit {
 
   expireDate: any;
   dateOfPurchase: any;
-  searchInventory: string = '';
+  searchInventory: string = "";
 
   inventoryExpiryNextMonth: any = [];
   last5Sales: any = [];
@@ -59,18 +54,13 @@ export class InventoryComponent implements OnInit {
   saleQuantity: any;
   salePrice: any;
 
-  tabs = ['Expiring Next Month', 'Last 5 Sales'];
+  tabs = ["Expiring Next Month", "Last 5 Sales"];
 
   isSellInventoryVisible = false;
 
   ngOnInit(): void {
     this.getMedicine();
-    this.getInventory(
-      this.pageIndex,
-      this.pageSize,
-      this.filter,
-      this.searchInventory
-    );
+    this.getInventory(this.pageIndex, this.pageSize, this.filter, this.searchInventory);
 
     this.expiryNextMonth();
     this.getLast5Sales();
@@ -103,7 +93,7 @@ export class InventoryComponent implements OnInit {
     });
   }
 
-  getInventory(page: number, limit: number, filter?: any, search?: string) {
+  getInventory(page: number, limit: number, filter?: any, search: string = "") {
     this.control.getInventory({ page, limit, ...filter, search }).subscribe({
       next: (res) => {
         this.loadingInventory = false;
@@ -111,17 +101,17 @@ export class InventoryComponent implements OnInit {
           this.inventory = res.result.rows;
           this.totalInventory = res.result.totalCount;
         } else {
-          return this.control.openNotification(res.message, 'error');
+          return this.control.openNotification(res.message, "error");
         }
       },
       error: ({ error: res }) => {
-        return this.control.openNotification(res.message, 'error');
+        return this.control.openNotification(res.message, "error");
       },
     });
   }
 
   subtractDate(expiryDate: any) {
-    return moment(expiryDate).diff(moment(), 'days');
+    return moment(expiryDate).diff(moment(), "days");
   }
 
   onQueryParamsChange(params: NzTableQueryParams): void {
@@ -134,27 +124,18 @@ export class InventoryComponent implements OnInit {
     this.filter = {};
 
     if (!reset) {
-      if (this.selectedMedicine)
-        this.filter.medicineCode = this.selectedMedicine;
+      if (this.selectedMedicine) this.filter.medicineCode = this.selectedMedicine;
       if (this.expireDate && this.expireDate.length) {
-        this.filter.expireDateFrom = moment(this.expireDate[0]).format(
-          'YYYY-MM-DD'
-        );
-        this.filter.expireDateTo = moment(this.expireDate[1])
-          .add(1, 'd')
-          .format('YYYY-MM-DD');
+        this.filter.expireDateFrom = moment(this.expireDate[0]).format("YYYY-MM-DD");
+        this.filter.expireDateTo = moment(this.expireDate[1]).add(1, "d").format("YYYY-MM-DD");
       }
       if (this.dateOfPurchase && this.dateOfPurchase.length) {
-        this.filter.dateOfPurchaseFrom = moment(this.dateOfPurchase[0]).format(
-          'YYYY-MM-DD'
-        );
-        this.filter.dateOfPurchaseTo = moment(this.dateOfPurchase[1])
-          .add(1, 'd')
-          .format('YYYY-MM-DD');
+        this.filter.dateOfPurchaseFrom = moment(this.dateOfPurchase[0]).format("YYYY-MM-DD");
+        this.filter.dateOfPurchaseTo = moment(this.dateOfPurchase[1]).add(1, "d").format("YYYY-MM-DD");
       }
     } else {
-      this.selectedMedicine = '';
-      this.searchInventory = '';
+      this.selectedMedicine = "";
+      this.searchInventory = "";
       this.expireDate = [];
       this.dateOfPurchase = [];
     }
@@ -162,35 +143,26 @@ export class InventoryComponent implements OnInit {
     this.pageSize = 10;
     this.pageIndex = 1;
 
-    this.getInventory(
-      this.pageIndex,
-      this.pageSize,
-      this.filter,
-      this.searchInventory
-    );
+    this.getInventory(this.pageIndex, this.pageSize, this.filter, this.searchInventory);
   }
 
   expiryNextMonth() {
     this.control
       .getInventory({
         limit: 999999,
-        expireDateFrom: moment().format('YYYY-MM-DD'),
-        expireDateTo: moment()
-          .endOf('month')
-          .add(1, 'M')
-          .add(1, 'd')
-          .format('YYYY-MM-DD'),
+        expireDateFrom: moment().format("YYYY-MM-DD"),
+        expireDateTo: moment().endOf("month").add(1, "M").add(1, "d").format("YYYY-MM-DD"),
       })
       .subscribe({
         next: (res) => {
           if (res.code) {
             this.inventoryExpiryNextMonth = res.result.rows;
           } else {
-            return this.control.openNotification(res.message, 'error');
+            return this.control.openNotification(res.message, "error");
           }
         },
         error: ({ error: res }) => {
-          return this.control.openNotification(res.message, 'error');
+          return this.control.openNotification(res.message, "error");
         },
       });
   }
@@ -209,11 +181,11 @@ export class InventoryComponent implements OnInit {
               0
             );
           } else {
-            return this.control.openNotification(res.message, 'error');
+            return this.control.openNotification(res.message, "error");
           }
         },
         error: ({ error: res }) => {
-          return this.control.openNotification(res.message, 'error');
+          return this.control.openNotification(res.message, "error");
         },
       });
   }
@@ -233,12 +205,7 @@ export class InventoryComponent implements OnInit {
 
   onInventorySearch(event: any) {
     this.searchInventory = event;
-    this.getInventory(
-      this.pageIndex,
-      this.pageSize,
-      this.filter,
-      this.searchInventory
-    );
+    this.getInventory(this.pageIndex, this.pageSize, this.filter, this.searchInventory);
   }
 
   openSellInventoryModal(data: any) {
@@ -260,19 +227,19 @@ export class InventoryComponent implements OnInit {
     const { saleQuantity, salePrice } = this.validateFormInventorySell.value;
 
     if (!this.validateFormInventorySell.valid) {
-      return this.control.openNotification('Invalid Value', 'error');
+      return this.control.openNotification("Invalid Value", "error");
     }
 
     if (isNaN(+saleQuantity) || isNaN(+salePrice)) {
-      return this.control.openNotification('Invalid Value', 'error');
+      return this.control.openNotification("Invalid Value", "error");
     }
 
     if (+saleQuantity === 0 || +salePrice === 0) {
-      return this.control.openNotification('Invalid Value', 'error');
+      return this.control.openNotification("Invalid Value", "error");
     }
 
     if (+saleQuantity > +this.tryingToSellInventory.quantity) {
-      return this.control.openNotification('Invalid Value', 'error');
+      return this.control.openNotification("Invalid Value", "error");
     }
 
     this.control
@@ -288,11 +255,11 @@ export class InventoryComponent implements OnInit {
             this.ngOnInit();
             return this.control.openNotification(res.message);
           } else {
-            return this.control.openNotification(res.message, 'error');
+            return this.control.openNotification(res.message, "error");
           }
         },
         error: ({ error: res }) => {
-          return this.control.openNotification(res.message, 'error');
+          return this.control.openNotification(res.message, "error");
         },
       });
   }
@@ -304,16 +271,30 @@ export class InventoryComponent implements OnInit {
           this.ngOnInit();
           return this.control.openNotification(res.message);
         } else {
-          return this.control.openNotification(res.message, 'error');
+          return this.control.openNotification(res.message, "error");
         }
       },
       error: ({ error: res }) => {
-        return this.control.openNotification(res.message, 'error');
+        return this.control.openNotification(res.message, "error");
       },
     });
   }
 
   copyText(textToCopy: string) {
     this.clipboard.copy(textToCopy);
+  }
+
+  openAddInventoryModal() {
+    const modal = this.modalService.create({
+      nzKeyboard: false,
+      nzMaskClosable: false,
+      nzFooter: null,
+      nzTitle: "Add Inventory",
+      nzContent: AddInventoryComponent,
+    });
+
+    modal.afterClose.subscribe(() => {
+      this.getInventory(1, 10);
+    });
   }
 }

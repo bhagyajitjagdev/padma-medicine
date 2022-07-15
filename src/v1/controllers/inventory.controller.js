@@ -15,9 +15,9 @@ exports.createInventory = async (req, res) => {
       medicine,
       boughtQuantity: quantity,
       quantity,
-      expireDate,
+      expireDate: moment(expireDate).endOf("month").toDate(),
       price,
-      dateOfPurchase,
+      dateOfPurchase: moment(dateOfPurchase).toDate(),
     };
 
     const createdInventory = await InventoryService.createInventory(body);
@@ -30,11 +30,12 @@ exports.createInventory = async (req, res) => {
 
 exports.updateInventory = async (req, res) => {
   try {
-    const { quantity, isDeleted } = req.body;
+    const { quantity, isReturned, isDeleted } = req.body;
 
     const body = {};
 
     if (quantity) body.quantity = quantity;
+    if (req.body.hasOwnProperty("isReturned")) body.isReturned = isReturned;
     if (req.body.hasOwnProperty("isDeleted")) body.isDeleted = isDeleted;
 
     if (!Object.keys(body).length) return ERROR(res, null, "Nothing to update");
@@ -60,6 +61,51 @@ exports.getInventories = async (req, res) => {
     } = req.query;
 
     const body = {};
+
+    if (inventoryCode) body.inventoryCode = inventoryCode;
+    if (batchCode) body.batchCode = batchCode;
+    if (medicineCode) body["medicine.medicineCode"] = medicineCode;
+
+    if (expireDateFrom && expireDateTo)
+      body.expireDate = { $gte: moment(expireDateFrom).toDate(), $lte: moment(expireDateTo).toDate() };
+
+    if (dateOfPurchaseFrom && dateOfPurchaseTo)
+      body.dateOfPurchase = { $gte: moment(dateOfPurchaseFrom).toDate(), $lte: moment(dateOfPurchaseTo).toDate() };
+
+    if (search)
+      body.$or = [
+        {
+          batchCode: new RegExp(search, "i"),
+        },
+        {
+          "medicine.name": new RegExp(search, "i"),
+        },
+      ];
+
+    const inventoryPresent = await InventoryService.getInventories({ ...body }, req.query);
+
+    return OK(res, inventoryPresent, "inventories fetched successfully");
+  } catch (error) {
+    return ERROR(res, { error }, error.message || "Something went Wrong");
+  }
+};
+
+exports.getReturnedInventories = async (req, res) => {
+  try {
+    const {
+      search,
+      batchCode,
+      medicineCode,
+      expireDateFrom,
+      expireDateTo,
+      dateOfPurchaseFrom,
+      dateOfPurchaseTo,
+      inventoryCode,
+    } = req.query;
+
+    const body = {
+      isReturned: true,
+    };
 
     if (inventoryCode) body.inventoryCode = inventoryCode;
     if (batchCode) body.batchCode = batchCode;
