@@ -1,0 +1,24 @@
+<ul nz-menu nzTheme="light" nzMode="inline">
+  <!-- <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+    <ul> -->
+  <li nz-menu-item nzMatchRouter>
+    <i nz-icon nzType="home" nzTheme="outline"></i>
+    <a routerLink="/auth/dashboard">Home</a>
+  </li>
+  <li nz-menu-item nzMatchRouter>
+    <i nz-icon nzType="file-excel" nzTheme="outline"></i>
+    <a routerLink="/auth/inventory">Inventory</a>
+  </li>
+  <li nz-menu-item nzMatchRouter>
+    <i nz-icon nzType="user" nzTheme="outline"></i>
+    <a routerLink="/auth/sale">Sales</a>
+  </li>
+  <li nz-menu-item nzMatchRouter>
+    <i nz-icon nzType="user" nzTheme="outline"></i>
+    <a routerLink="/auth/medicine">Medicine</a>
+  </li>
+  <li nz-menu-item nzMatchRouter>
+    <i nz-icon nzType="logout" nzTheme="outline"></i>
+    <a (click)="logout()">Logout</a>
+  </li>
+</ul>

@@ -1,0 +1,124 @@
+.login-background {
+  background: #222235;
+  min-height: 100%;
+  width: 100%;
+  padding: 50px 100px;
+}
+
+.div-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-background h1 {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 50px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.login-background p {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 34px;
+
+  text-align: center;
+
+  margin-bottom: 10px;
+}
+
+.form-container {
+  width: 418px;
+  min-height: 408px;
+  background: #141414;
+  box-shadow: 0px 5px 10px rgba(160, 163, 189, 0.1);
+  border-radius: 10px;
+}
+
+.input-password {
+  box-shadow: 0px 5px 10px rgba(160, 163, 189, 0.1);
+  background: #eff0f6;
+  border-radius: 10px;
+}
+
+i {
+  color: #141414;
+  margin-bottom: 4px;
+}
+
+.login-small-circle {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 125px;
+  left: -65px;
+}
+
+.login-big-circle {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 45px;
+  left: -35px;
+}
+
+.login-wrapper {
+  position: relative;
+}
+
+.login-form {
+  padding: 40px;
+}
+
+.login-form p {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 34px;
+  text-align: left;
+  color: #171717;
+}
+
+.login-input {
+  background: #eff0f6;
+  border-radius: 8px !important;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 34px;
+  display: flex;
+  align-items: center;
+  color: #2d2d2e;
+}
+
+.login-form-button {
+  background: #2469b0;
+  border-radius: 4px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  height: 44px;
+  margin-top: 20px;
+}
+
+.login-form-forgot {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 34px;
+  display: flex;
+  align-items: center;
+  color: #5887ff;
+}

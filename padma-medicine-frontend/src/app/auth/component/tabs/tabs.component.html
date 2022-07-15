@@ -1,0 +1,64 @@
+<div *ngIf="items.length">
+  <nz-row class="flex justify-between mx-3 my-2" *ngIf="itemsIncome !== null">
+    <nz-col>
+      <nz-statistic
+        [nzValue]="(items.length | number)!"
+        [nzTitle]="firstTitle"
+      ></nz-statistic>
+    </nz-col>
+    <nz-col>
+      <nz-statistic
+        [nzValue]="(itemsIncome | number: '1.0-2')!"
+        [nzTitle]="secondTitle"
+      ></nz-statistic>
+    </nz-col>
+  </nz-row>
+  <nz-card
+    nzHoverable
+    class="mb-4"
+    [nzTitle]="data?.inventory.medicine.name"
+    nz-tooltip
+    nzTooltipPlacement="right"
+    [nzTooltipTitle]="data?.inventory.medicine.name"
+    *ngFor="let data of items"
+  >
+    <div class="flex justify-between">
+      <p>Invoice No.:</p>
+      <p
+        nz-tooltip
+        nzTooltipPlacement="right"
+        [nzTooltipTitle]="data.saleCode"
+        (click)="copyText(data.saleCode)"
+      >
+        {{ data.saleCode | slice: 0:10 }}...
+      </p>
+    </div>
+    <div class="flex justify-between">
+      <p>Batch Code:</p>
+      <p
+        nz-tooltip
+        nzTooltipPlacement="right"
+        [nzTooltipTitle]="data?.inventory.batchCode"
+        (click)="copyText(data?.inventory.batchCode)"
+      >
+        {{ data?.inventory.batchCode | slice: 0:10 }}
+        {{ data?.inventory.batchCode.length > 10 ? ".." : "" }}
+      </p>
+    </div>
+    <div class="flex justify-between">
+      <p>Sold At:</p>
+      <p>{{ data.createdAt | date: "MMM d, y, h:mm a" }}</p>
+    </div>
+    <div class="flex justify-between">
+      <p>Sold Quantity:</p>
+      <p>{{ data.saleQuantity }}</p>
+    </div>
+    <div class="flex justify-between">
+      <p>Sell Price:</p>
+      <p>{{ data.salePrice }}</p>
+    </div>
+  </nz-card>
+</div>
+<div *ngIf="!items.length">
+  <nz-empty class="bg-background pb-4 mt-8" nzNotFoundImage="simple"></nz-empty>
+</div>

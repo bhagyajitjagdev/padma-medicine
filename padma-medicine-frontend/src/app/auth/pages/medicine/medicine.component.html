@@ -1,0 +1,35 @@
+<nz-card
+  nzTitle="Medicine"
+  (scroll)="scrollHandler()"
+  [nzExtra]="extraTemplate"
+>
+  <div
+    *ngFor="let med of medicine"
+    nz-card-grid
+    [ngStyle]="gridStyle"
+    nz-tooltip
+    nzTooltipPlacement="top"
+    [nzTooltipTitle]="med.name"
+  >
+    {{ med.name | slice: 0:45 }}
+    {{ med.name.length > 45 ? "..." : "" }}
+  </div>
+</nz-card>
+<ng-template #extraTemplate>
+  <nz-input-group
+    nzSize="large"
+    class="rounded-lg"
+    [nzSuffix]="suffixTemplate0"
+  >
+    <input
+      type="text"
+      nz-input
+      [(ngModel)]="searchMedicine"
+      (ngModelChange)="onMedicineSearch($event)"
+      placeholder="search for item"
+    />
+  </nz-input-group>
+  <ng-template #suffixTemplate0>
+    <i nz-icon nzType="search"></i>
+  </ng-template>
+</ng-template>

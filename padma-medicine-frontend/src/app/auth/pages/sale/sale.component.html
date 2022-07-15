@@ -1,0 +1,210 @@
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <aside class="col-span-1 p-6 bg-card rounded-lg">
+    <div>
+      <h1 class="font-bold text-lg mb-3">Search for items</h1>
+      <h3 class="mb-3">Type batch, medicine name</h3>
+      <div class="mb-6">
+        <nz-input-group
+          nzSize="large"
+          class="rounded-lg"
+          [nzSuffix]="suffixTemplate0"
+        >
+          <input
+            type="text"
+            nz-input
+            [(ngModel)]="searchSale"
+            (ngModelChange)="onSaleSearch($event)"
+            placeholder="search for item"
+          />
+        </nz-input-group>
+        <ng-template #suffixTemplate0>
+          <i nz-icon nzType="search"></i>
+        </ng-template>
+      </div>
+    </div>
+    <div class="bg-card p-6 rounded-lg my-6 card-container">
+      <nz-tabset nzCentered nzType="card">
+        <nz-tab [nzTitle]="tabs[0]">
+          <app-tabs
+            [items]="todaySales"
+            [itemsIncome]="todaySalesIncome"
+            firstTitle="Today's Sales"
+            secondTitle="Today's Amount"
+          ></app-tabs>
+        </nz-tab>
+        <nz-tab [nzTitle]="tabs[1]">
+          <app-tabs
+            [items]="weekSales"
+            [itemsIncome]="weekSalesIncome"
+            firstTitle="Last 7 Days Sales"
+            secondTitle="last 7 Days Amount"
+          ></app-tabs>
+        </nz-tab>
+        <nz-tab [nzTitle]="tabs[2]">
+          <app-tabs
+            [items]="monthSales"
+            [itemsIncome]="monthSalesIncome"
+            firstTitle="Last 30 Days Sales"
+            secondTitle="last 30 Days Amount"
+          ></app-tabs>
+        </nz-tab>
+      </nz-tabset>
+    </div>
+  </aside>
+  <section class="col-span-2 h-full bg-card p-6 rounded-lg">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="col-span-2">
+        <nz-select
+          class="w-full mb-3"
+          nzSize="large"
+          nzPlaceHolder="Select Medicine"
+          nzAllowClear
+          nzShowSearch
+          nzServerSearch
+          [(ngModel)]="selectedMedicine"
+          (nzOnSearch)="onSearch($event)"
+        >
+          <ng-container *ngFor="let med of medicine">
+            <nz-option
+              *ngIf="!isLoading"
+              [nzValue]="med.medicineCode"
+              [nzLabel]="med.name"
+            ></nz-option>
+          </ng-container>
+          <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+            <i nz-icon nzType="loading" class="loading-icon"></i>
+            Loading Medicine...
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <div class="col-span-1">
+        <div class="w-full justify-between flex">
+          <button
+            nz-button
+            class="w-4/5"
+            nzType="default"
+            nzSize="large"
+            (click)="applyFilter()"
+          >
+            Apply
+          </button>
+          <button
+            nz-tooltip
+            nzTooltipTitle="Reset"
+            nz-button
+            nzType="default"
+            nzSize="large"
+            (click)="applyFilter(true)"
+          >
+            <i nz-icon nzType="rest" nzTheme="outline"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-between mb-6">
+      <nz-range-picker
+        nz-tooltip
+        nzTooltipTitle="Date of Purchase"
+        nzSize="large"
+        class="w-full"
+        [(ngModel)]="dateOfPurchase"
+      ></nz-range-picker>
+
+      <div class="w-4"></div>
+
+      <nz-range-picker
+        nz-tooltip
+        nzTooltipTitle="Expiry Date"
+        nzSize="large"
+        class="w-full"
+        [(ngModel)]="expireDate"
+      ></nz-range-picker>
+    </div>
+
+    <nz-table
+      #nzTable
+      [nzData]="sale"
+      [nzFrontPagination]="false"
+      [nzLoading]="loadingSale"
+      [nzTotal]="totalSale"
+      [nzPageSize]="pageSize"
+      [nzPageIndex]="pageIndex"
+      (nzQueryParams)="onQueryParamsChange($event)"
+      class="h-full"
+      nzTableLayout="fixed"
+    >
+      <thead>
+        <tr>
+          <th nzWidth="30%">Invoice No.</th>
+          <th nzWidth="28%">Medicine</th>
+          <th>Quantity</th>
+          <th nzWidth="180px">Sold At</th>
+          <th nzWidth="60px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let data of nzTable.data">
+          <tr>
+            <td>{{ data.saleCode }}</td>
+            <td
+              nzEllipsis
+              nz-tooltip
+              [nzTooltipTitle]="data?.inventory?.medicine.name"
+            >
+              {{ data?.inventory?.medicine.name }}
+            </td>
+            <td>{{ data.saleQuantity }}</td>
+            <td>{{ data.createdAt | date: "MMM d, y, h:mm a" }}</td>
+
+            <td
+              class="more-action"
+              [nzExpand]="expandSet.has(data.saleCode)"
+              (nzExpandChange)="onExpandChange(data.saleCode, $event)"
+            ></td>
+          </tr>
+          <tr [nzExpand]="expandSet.has(data.saleCode)">
+            <nz-card nzHoverable class="h-40">
+              <ng-template #deleteSale>
+                <button
+                  nz-button
+                  nzDanger
+                  nzSize="small"
+                  nz-tooltip
+                  nzTooltipTitle="Delete"
+                  (click)="deleteSaleById(data.saleCode)"
+                >
+                  <i nz-icon nzType="delete"></i>
+                </button>
+              </ng-template>
+              <nz-descriptions
+                [nzTitle]="data?.inventory?.medicine.name"
+                [nzExtra]="deleteSale"
+              >
+                <nz-descriptions-item nzTitle="Sold Quantity">{{
+                  data.saleQuantity
+                }}</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Sold At">
+                  {{ data.createdAt | date: "MMM d, y, h:mm a" }}
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Invoice No.">{{
+                  data.saleCode
+                }}</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Batch Code">{{
+                  data?.inventory.batchCode
+                }}</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Date of Expiry">
+                  {{ data.inventory.expireDate | date: "MMM, y" }}
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Sell Price">
+                  {{ data.salePrice }}
+                </nz-descriptions-item>
+              </nz-descriptions>
+            </nz-card>
+          </tr>
+        </ng-container>
+      </tbody>
+    </nz-table>
+  </section>
+</div>
