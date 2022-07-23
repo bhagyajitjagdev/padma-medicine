@@ -203,12 +203,28 @@
             <nz-card nzHoverable class="h-40">
               <ng-template #deleteInventory>
                 <button
+                  nz-popconfirm
+                  nzPopconfirmTitle="Are you sure?"
+                  nzIcon="warning"
+                  nz-button
+                  nzSize="small"
+                  nz-tooltip
+                  nzTooltipTitle="Return"
+                  class="mr-2"
+                  (nzOnConfirm)="returnInventoryById(data.inventoryCode)"
+                >
+                  <i nz-icon nzType="retweet"></i>
+                </button>
+                <button
+                  nz-popconfirm
+                  nzPopconfirmTitle="Are you sure?"
+                  nzIcon="warning"
                   nz-button
                   nzDanger
                   nzSize="small"
                   nz-tooltip
                   nzTooltipTitle="Delete"
-                  (click)="deleteInventoryById(data.inventoryCode)"
+                  (nzOnConfirm)="deleteInventoryById(data.inventoryCode)"
                 >
                   <i nz-icon nzType="delete"></i>
                 </button>

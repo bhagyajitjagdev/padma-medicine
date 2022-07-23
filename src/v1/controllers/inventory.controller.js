@@ -35,7 +35,10 @@ exports.updateInventory = async (req, res) => {
     const body = {};
 
     if (quantity) body.quantity = quantity;
-    if (req.body.hasOwnProperty("isReturned")) body.isReturned = isReturned;
+    if (req.body.hasOwnProperty("isReturned")) {
+      body.isReturned = isReturned;
+      body.returnedOn = moment().toDate();
+    }
     if (req.body.hasOwnProperty("isDeleted")) body.isDeleted = isDeleted;
 
     if (!Object.keys(body).length) return ERROR(res, null, "Nothing to update");
@@ -103,9 +106,7 @@ exports.getReturnedInventories = async (req, res) => {
       inventoryCode,
     } = req.query;
 
-    const body = {
-      isReturned: true,
-    };
+    const body = {};
 
     if (inventoryCode) body.inventoryCode = inventoryCode;
     if (batchCode) body.batchCode = batchCode;
@@ -127,7 +128,7 @@ exports.getReturnedInventories = async (req, res) => {
         },
       ];
 
-    const inventoryPresent = await InventoryService.getInventories({ ...body }, req.query);
+    const inventoryPresent = await InventoryService.getInventoriesReturned({ ...body }, req.query);
 
     return OK(res, inventoryPresent, "inventories fetched successfully");
   } catch (error) {

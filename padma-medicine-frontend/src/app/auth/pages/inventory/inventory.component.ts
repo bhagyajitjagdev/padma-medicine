@@ -93,8 +93,8 @@ export class InventoryComponent implements OnInit {
     });
   }
 
-  getInventory(page: number, limit: number, filter?: any, search: string = "") {
-    this.control.getInventory({ page, limit, ...filter, search }).subscribe({
+  getInventory(page: number, limit: number, filter?: any, search: string = "", scroll?: boolean) {
+    this.control.getInventory({ page, limit, ...filter, search, scroll }).subscribe({
       next: (res) => {
         this.loadingInventory = false;
         if (res.code) {
@@ -205,7 +205,7 @@ export class InventoryComponent implements OnInit {
 
   onInventorySearch(event: any) {
     this.searchInventory = event;
-    this.getInventory(this.pageIndex, this.pageSize, this.filter, this.searchInventory);
+    this.getInventory(this.pageIndex, this.pageSize, this.filter, this.searchInventory, true);
   }
 
   openSellInventoryModal(data: any) {
@@ -266,6 +266,22 @@ export class InventoryComponent implements OnInit {
 
   deleteInventoryById(inventoryCode: string) {
     this.control.updateInventory(inventoryCode, { isDeleted: true }).subscribe({
+      next: (res) => {
+        if (res.code) {
+          this.ngOnInit();
+          return this.control.openNotification(res.message);
+        } else {
+          return this.control.openNotification(res.message, "error");
+        }
+      },
+      error: ({ error: res }) => {
+        return this.control.openNotification(res.message, "error");
+      },
+    });
+  }
+
+  returnInventoryById(inventoryCode: string) {
+    this.control.updateInventory(inventoryCode, { isReturned: true }).subscribe({
       next: (res) => {
         if (res.code) {
           this.ngOnInit();

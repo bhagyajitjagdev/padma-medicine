@@ -1,17 +1,17 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { APIService } from 'src/app/services/api.service';
+import { Component, OnInit, HostListener } from "@angular/core";
+import { APIService } from "src/app/services/api.service";
 
 @Component({
-  selector: 'app-medicine',
-  templateUrl: './medicine.component.html',
-  styleUrls: ['./medicine.component.css'],
+  selector: "app-medicine",
+  templateUrl: "./medicine.component.html",
+  styleUrls: ["./medicine.component.css"],
 })
 export class MedicineComponent implements OnInit {
   constructor(private control: APIService) {}
 
   gridStyle = {
-    width: '33.3333333%',
-    textAlign: 'center',
+    width: "33.3333333%",
+    textAlign: "center",
   };
 
   medicine: any = [];
@@ -19,17 +19,15 @@ export class MedicineComponent implements OnInit {
   pageSize = 100;
   pageIndex = 1;
   totalMedicine = 1;
-  searchMedicine: string = '';
+  searchMedicine: string = "";
 
   ngOnInit(): void {
     this.getMedicine(this.pageIndex, this.pageSize, this.searchMedicine);
   }
 
-  @HostListener('window:scroll', ['$event'])
+  @HostListener("window:scroll", ["$event"])
   scrollHandler() {
-    const pos =
-      (document.documentElement.scrollTop || document.body.scrollTop) +
-      document.documentElement.offsetHeight;
+    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
     const currentPos = pos + 20;
 
@@ -40,8 +38,8 @@ export class MedicineComponent implements OnInit {
     }
   }
 
-  getMedicine(page: number, limit: number, search?: string) {
-    this.control.getMedicine({ page, limit, search }).subscribe({
+  getMedicine(page: number, limit: number, search?: string, scroll?: boolean) {
+    this.control.getMedicine({ page, limit, search, scroll }).subscribe({
       next: (res) => {
         this.loadingMedicine = false;
         if (res.code) {
@@ -52,11 +50,11 @@ export class MedicineComponent implements OnInit {
             this.medicine = [...this.medicine, ...res.result.rows];
           }
         } else {
-          return this.control.openNotification(res.message, 'error');
+          return this.control.openNotification(res.message, "error");
         }
       },
       error: ({ error: res }) => {
-        return this.control.openNotification(res.message, 'error');
+        return this.control.openNotification(res.message, "error");
       },
     });
   }
@@ -66,6 +64,6 @@ export class MedicineComponent implements OnInit {
 
     this.pageIndex = 1;
 
-    this.getMedicine(this.pageIndex, this.pageSize, this.searchMedicine);
+    this.getMedicine(this.pageIndex, this.pageSize, this.searchMedicine, true);
   }
 }

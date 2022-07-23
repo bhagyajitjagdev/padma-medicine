@@ -80,8 +80,8 @@ export class SaleComponent implements OnInit {
     });
   }
 
-  getSale(page: number, limit: number, filter?: any, search?: string) {
-    this.control.getSale({ page, limit, ...filter, search }).subscribe({
+  getSale(page: number, limit: number, filter?: any, search?: string, scroll?: boolean) {
+    this.control.getSale({ page, limit, ...filter, search, scroll }).subscribe({
       next: (res) => {
         this.loadingSale = false;
         if (res.code) {
@@ -214,7 +214,7 @@ export class SaleComponent implements OnInit {
 
   onSaleSearch(event: any) {
     this.searchSale = event;
-    this.getSale(this.pageIndex, this.pageSize, this.filter, this.searchSale);
+    this.getSale(this.pageIndex, this.pageSize, this.filter, this.searchSale, true);
   }
 
   deleteSaleById(saleCode: string) {

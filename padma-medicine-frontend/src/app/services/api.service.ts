@@ -115,7 +115,7 @@ export class APIService {
   fileUpload(payload: any) {
     const formData = new FormData();
     formData.append("file", payload);
-    return this.http.post<ResApi>(`${this.baseUrl}/file/upload`, payload);
+    return this.http.post<ResApi>(`${this.baseUrl}file/upload`, payload);
   }
 
   logout() {
@@ -125,40 +125,40 @@ export class APIService {
   }
 
   getInventory(params?: any) {
-    return this.http.get<ResApi>(`${this.baseUrl}/inventory`, {
+    return this.http.get<ResApi>(`${this.baseUrl}inventory`, {
       params: params,
     });
   }
 
   getMedicine(params?: any) {
-    return this.http.get<ResApi>(`${this.baseUrl}/medicine`, {
+    return this.http.get<ResApi>(`${this.baseUrl}medicine`, {
       params: params,
     });
   }
 
   createMedicine(body: any) {
-    return this.http.post<ResApi>(`${this.baseUrl}/medicine`, body);
+    return this.http.post<ResApi>(`${this.baseUrl}medicine`, body);
   }
 
   createInventory(body: any) {
-    return this.http.post<ResApi>(`${this.baseUrl}/inventory`, body);
+    return this.http.post<ResApi>(`${this.baseUrl}inventory`, body);
   }
 
   updateInventory(inventoryCode: string, body: any) {
-    return this.http.put<ResApi>(`${this.baseUrl}/inventory/${inventoryCode}`, body);
+    return this.http.put<ResApi>(`${this.baseUrl}inventory/${inventoryCode}`, body);
   }
 
   getSale(params?: any) {
-    return this.http.get<ResApi>(`${this.baseUrl}/sale`, {
+    return this.http.get<ResApi>(`${this.baseUrl}sale`, {
       params: params,
     });
   }
 
   updateSale(saleCode: string, body: any) {
-    return this.http.put<ResApi>(`${this.baseUrl}/sale/${saleCode}`, body);
+    return this.http.put<ResApi>(`${this.baseUrl}sale/${saleCode}`, body);
   }
 
   createSales(body: any) {
-    return this.http.post<ResApi>(`${this.baseUrl}/sale`, body);
+    return this.http.post<ResApi>(`${this.baseUrl}sale`, body);
   }
 }

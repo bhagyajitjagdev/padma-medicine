@@ -138,12 +138,15 @@
             <nz-card nzHoverable class="h-40">
               <ng-template #deleteSale>
                 <button
+                  nz-popconfirm
+                  nzPopconfirmTitle="Are you sure?"
+                  nzIcon="warning"
                   nz-button
                   nzDanger
                   nzSize="small"
                   nz-tooltip
                   nzTooltipTitle="Delete"
-                  (click)="deleteSaleById(data.saleCode)"
+                  (nzOnConfirm)="deleteSaleById(data.saleCode)"
                 >
                   <i nz-icon nzType="delete"></i>
                 </button>

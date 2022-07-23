@@ -17,6 +17,7 @@ const InventorySchema = new mongoose.Schema(
     price: { type: Number, require: true },
     dateOfPurchase: { type: Date, require: true },
     isReturned: { type: Boolean, default: false },
+    returnedOn: { type: Date, default: null },
     isDeleted: { type: Boolean, default: false },
   },
   { timestamps: true }

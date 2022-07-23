@@ -35,6 +35,7 @@ export class AddInventoryComponent implements OnInit {
     this.control
       .getMedicine({
         search: name,
+        scroll: true,
         limit: name === "#" || name === "" ? 10 : 999999,
       })
       .subscribe({
@@ -64,7 +65,7 @@ export class AddInventoryComponent implements OnInit {
 
   batchCodeAsyncValidator = (fc: FormControl) =>
     new Observable((observer: Observer<ValidationErrors | null>) => {
-      this.control.getInventory({ batchCode: fc.value }).subscribe({
+      this.control.getInventory({ batchCode: fc.value, scroll: true }).subscribe({
         next: (res) => {
           if (res.code && res.result.rows.length) {
             observer.next({ error: true, duplicated: true });

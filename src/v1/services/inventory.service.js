@@ -21,5 +21,19 @@ exports.getInventories = async (body, { page = 1, limit = 10, order = -1 } = {})
   };
 };
 
+exports.getInventoriesReturned = async (body, { page = 1, limit = 10, order = -1 } = {}) => {
+  const inventories = await db.Inventory.find({ ...body, isDeleted: false, isReturned: true, quantity: { $gt: 0 } })
+    .sort({ createdAt: order })
+    .skip(page > 0 ? (page - 1) * limit : 0)
+    .limit(limit)
+    .lean();
+
+  return {
+    totalCount: await db.Inventory.count({ ...body, isDeleted: false }),
+    count: inventories.length,
+    rows: inventories,
+  };
+};
+
 exports.updateInventory = async (inventoryCode, body) =>
   db.Inventory.findOneAndUpdate({ inventoryCode }, { ...body }, { new: true });
