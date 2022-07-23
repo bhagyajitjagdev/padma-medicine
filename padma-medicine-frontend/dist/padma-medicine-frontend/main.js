@@ -822,7 +822,7 @@ class APIService {
     fileUpload(payload) {
         const formData = new FormData();
         formData.append("file", payload);
-        return this.http.post(`${this.baseUrl}/file/upload`, payload);
+        return this.http.post(`${this.baseUrl}file/upload`, payload);
     }
     logout() {
         localStorage.removeItem("padma-token");
@@ -830,34 +830,34 @@ class APIService {
         this.router.navigate(["/login"]);
     }
     getInventory(params) {
-        return this.http.get(`${this.baseUrl}/inventory`, {
+        return this.http.get(`${this.baseUrl}inventory`, {
             params: params,
         });
     }
     getMedicine(params) {
-        return this.http.get(`${this.baseUrl}/medicine`, {
+        return this.http.get(`${this.baseUrl}medicine`, {
             params: params,
         });
     }
     createMedicine(body) {
-        return this.http.post(`${this.baseUrl}/medicine`, body);
+        return this.http.post(`${this.baseUrl}medicine`, body);
     }
     createInventory(body) {
-        return this.http.post(`${this.baseUrl}/inventory`, body);
+        return this.http.post(`${this.baseUrl}inventory`, body);
     }
     updateInventory(inventoryCode, body) {
-        return this.http.put(`${this.baseUrl}/inventory/${inventoryCode}`, body);
+        return this.http.put(`${this.baseUrl}inventory/${inventoryCode}`, body);
     }
     getSale(params) {
-        return this.http.get(`${this.baseUrl}/sale`, {
+        return this.http.get(`${this.baseUrl}sale`, {
             params: params,
         });
     }
     updateSale(saleCode, body) {
-        return this.http.put(`${this.baseUrl}/sale/${saleCode}`, body);
+        return this.http.put(`${this.baseUrl}sale/${saleCode}`, body);
     }
     createSales(body) {
-        return this.http.post(`${this.baseUrl}/sale`, body);
+        return this.http.post(`${this.baseUrl}sale`, body);
     }
 }
 APIService.ɵfac = function APIService_Factory(t) { return new (t || APIService)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](ng_zorro_antd_message__WEBPACK_IMPORTED_MODULE_4__.NzMessageService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__.ActivatedRoute)); };
@@ -940,28 +940,33 @@ class TokenInterceptorService {
     handleError(err) {
         this.control.spin(false);
         if (err.status === 401 || err.status === 403) {
+            this.stack = [];
             this.control.logout();
         }
         return (0,rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_1__.throwError)(err);
     }
     intercept(req, next) {
-        this.control.spin(true);
-        this.stack.push(1);
-        console.log('push', this.stack);
+        if (!req.params.get("scroll")) {
+            this.control.spin(true);
+            this.stack.push(1);
+        }
+        console.log("push", this.stack);
         //GET TOKEN
-        const authToken = localStorage.getItem('padma-token');
+        const authToken = localStorage.getItem("padma-token");
         //SET TOKEN
         const authRequest = req.clone({
-            headers: req.headers.set('Authorization', 'Bearer ' + authToken),
+            headers: req.headers.set("Authorization", "Bearer " + authToken),
         });
         return next
             .handle(authRequest)
             .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.tap)((event) => {
             if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpResponse) {
-                this.stack.pop();
-                console.log('pop', this.stack);
-                if (!this.stack.length) {
-                    this.control.spin(false);
+                if (!req.params.get("scroll")) {
+                    this.stack.pop();
+                    console.log("pop", this.stack);
+                    if (!this.stack.length) {
+                        this.control.spin(false);
+                    }
                 }
             }
         }))
@@ -969,7 +974,7 @@ class TokenInterceptorService {
     }
 }
 TokenInterceptorService.ɵfac = function TokenInterceptorService_Factory(t) { return new (t || TokenInterceptorService)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](_api_service__WEBPACK_IMPORTED_MODULE_0__.APIService)); };
-TokenInterceptorService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineInjectable"]({ token: TokenInterceptorService, factory: TokenInterceptorService.ɵfac, providedIn: 'root' });
+TokenInterceptorService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineInjectable"]({ token: TokenInterceptorService, factory: TokenInterceptorService.ɵfac, providedIn: "root" });
 
 
 /***/ }),

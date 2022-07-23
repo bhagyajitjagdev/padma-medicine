@@ -441,7 +441,8 @@ class AddInventoryComponent {
 
     this.batchCodeAsyncValidator = fc => new rxjs__WEBPACK_IMPORTED_MODULE_4__.Observable(observer => {
       this.control.getInventory({
-        batchCode: fc.value
+        batchCode: fc.value,
+        scroll: true
       }).subscribe({
         next: res => {
           if (res.code && res.result.rows.length) {
@@ -496,6 +497,7 @@ class AddInventoryComponent {
   onMedicineSearch(name) {
     this.control.getMedicine({
       search: name,
+      scroll: true,
       limit: name === "#" || name === "" ? 10 : 999999
     }).subscribe({
       next: res => {
@@ -914,9 +916,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng_zorro_antd_button__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ng-zorro-antd/button */ 5938);
 /* harmony import */ var ng_zorro_antd_core_wave__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ng-zorro-antd/core/wave */ 4805);
 /* harmony import */ var ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ng-zorro-antd/table */ 3134);
-/* harmony import */ var ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ng-zorro-antd/descriptions */ 3698);
-/* harmony import */ var ng_zorro_antd_form__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ng-zorro-antd/form */ 9671);
-/* harmony import */ var ng_zorro_antd_grid__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ng-zorro-antd/grid */ 3395);
+/* harmony import */ var ng_zorro_antd_popconfirm__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ng-zorro-antd/popconfirm */ 5174);
+/* harmony import */ var ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ng-zorro-antd/descriptions */ 3698);
+/* harmony import */ var ng_zorro_antd_form__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ng-zorro-antd/form */ 9671);
+/* harmony import */ var ng_zorro_antd_grid__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ng-zorro-antd/grid */ 3395);
+
 
 
 
@@ -1052,12 +1056,16 @@ function InventoryComponent_nz_option_25_Template(rf, ctx) { if (rf & 1) {
 function InventoryComponent_ng_container_54_ng_template_17_Template(rf, ctx) { if (rf & 1) {
     const _r28 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "button", 61);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function InventoryComponent_ng_container_54_ng_template_17_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r28); const data_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]().$implicit; const ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r26.deleteInventoryById(data_r23.inventoryCode); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("nzOnConfirm", function InventoryComponent_ng_container_54_ng_template_17_Template_button_nzOnConfirm_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r28); const data_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]().$implicit; const ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r26.returnInventoryById(data_r23.inventoryCode); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "i", 62);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "button", 63);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("nzOnConfirm", function InventoryComponent_ng_container_54_ng_template_17_Template_button_nzOnConfirm_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r28); const data_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]().$implicit; const ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r29.deleteInventoryById(data_r23.inventoryCode); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](3, "i", 64);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } }
 function InventoryComponent_ng_container_54_Template(rf, ctx) { if (rf & 1) {
-    const _r30 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    const _r32 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementContainerStart"](0);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "tr")(2, "td");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](3);
@@ -1073,14 +1081,14 @@ function InventoryComponent_ng_container_54_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](10, "date");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](11, "td", 47)(12, "button", 48);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function InventoryComponent_ng_container_54_Template_button_click_12_listener() { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r30); const data_r23 = restoredCtx.$implicit; const ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r29.openSellInventoryModal(data_r23); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function InventoryComponent_ng_container_54_Template_button_click_12_listener() { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r32); const data_r23 = restoredCtx.$implicit; const ctx_r31 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r31.openSellInventoryModal(data_r23); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](13, "i", 49);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](14, "td", 50);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("nzExpandChange", function InventoryComponent_ng_container_54_Template_td_nzExpandChange_14_listener($event) { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r30); const data_r23 = restoredCtx.$implicit; const ctx_r31 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r31.onExpandChange(data_r23.inventoryCode, $event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("nzExpandChange", function InventoryComponent_ng_container_54_Template_td_nzExpandChange_14_listener($event) { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r32); const data_r23 = restoredCtx.$implicit; const ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r33.onExpandChange(data_r23.inventoryCode, $event); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](15, "tr", 51)(16, "nz-card", 52);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](17, InventoryComponent_ng_container_54_ng_template_17_Template, 2, 0, "ng-template", null, 53, _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplateRefExtractor"]);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](17, InventoryComponent_ng_container_54_ng_template_17_Template, 4, 0, "ng-template", null, 53, _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplateRefExtractor"]);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](19, "nz-descriptions", 54)(20, "nz-descriptions-item", 55);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](21);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -1142,8 +1150,8 @@ function InventoryComponent_ng_template_56_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate2"]("", ctx_r11.tryingToSellInventory == null ? null : ctx_r11.tryingToSellInventory.medicine == null ? null : ctx_r11.tryingToSellInventory.medicine.name, " - ", ctx_r11.tryingToSellInventory == null ? null : ctx_r11.tryingToSellInventory.batchCode, "");
 } }
 function InventoryComponent_ng_template_58_Template(rf, ctx) { if (rf & 1) {
-    const _r33 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "nz-descriptions", 63)(1, "nz-descriptions-item", 55);
+    const _r35 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "nz-descriptions", 65)(1, "nz-descriptions-item", 55);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](3, "nz-descriptions-item", 58);
@@ -1163,15 +1171,15 @@ function InventoryComponent_ng_template_58_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](13, "nz-descriptions-item", 60);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](14);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](15, "nz-descriptions-item", 64)(16, "form", 65);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("ngSubmit", function InventoryComponent_ng_template_58_Template_form_ngSubmit_16_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r33); const ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r32.handleOkSellInventory(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](17, "nz-form-item")(18, "nz-form-control", 66)(19, "nz-input-group", 67);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](20, "input", 68);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](15, "nz-descriptions-item", 66)(16, "form", 67);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("ngSubmit", function InventoryComponent_ng_template_58_Template_form_ngSubmit_16_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r35); const ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r34.handleOkSellInventory(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](17, "nz-form-item")(18, "nz-form-control", 68)(19, "nz-input-group", 69);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](20, "input", 70);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()()()()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](21, "nz-descriptions-item", 69)(22, "form", 65);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("ngSubmit", function InventoryComponent_ng_template_58_Template_form_ngSubmit_22_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r33); const ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r34.handleOkSellInventory(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](23, "nz-form-item")(24, "nz-form-control", 66)(25, "nz-input-group", 70);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](26, "input", 71);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](21, "nz-descriptions-item", 71)(22, "form", 67);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("ngSubmit", function InventoryComponent_ng_template_58_Template_form_ngSubmit_22_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r35); const ctx_r36 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r36.handleOkSellInventory(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](23, "nz-form-item")(24, "nz-form-control", 68)(25, "nz-input-group", 72);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](26, "input", 73);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()()()()()();
 } if (rf & 2) {
     const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]();
@@ -1194,13 +1202,13 @@ function InventoryComponent_ng_template_58_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("nzLayout", "inline")("formGroup", ctx_r13.validateFormInventorySell);
 } }
 function InventoryComponent_ng_template_60_Template(rf, ctx) { if (rf & 1) {
-    const _r36 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "button", 72);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function InventoryComponent_ng_template_60_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r36); const ctx_r35 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r35.handleCancelSellInventory(); });
+    const _r38 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "button", 74);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function InventoryComponent_ng_template_60_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r38); const ctx_r37 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r37.handleCancelSellInventory(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1, "Cancel");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "button", 73);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function InventoryComponent_ng_template_60_Template_button_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r36); const ctx_r37 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r37.handleOkSellInventory(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "button", 75);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function InventoryComponent_ng_template_60_Template_button_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r38); const ctx_r39 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return ctx_r39.handleOkSellInventory(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](3, "Submit");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } }
@@ -1256,8 +1264,8 @@ class InventoryComponent {
             this.isLoading = false;
         });
     }
-    getInventory(page, limit, filter, search = "") {
-        this.control.getInventory(Object.assign(Object.assign({ page, limit }, filter), { search })).subscribe({
+    getInventory(page, limit, filter, search = "", scroll) {
+        this.control.getInventory(Object.assign(Object.assign({ page, limit }, filter), { search, scroll })).subscribe({
             next: (res) => {
                 this.loadingInventory = false;
                 if (res.code) {
@@ -1360,7 +1368,7 @@ class InventoryComponent {
     }
     onInventorySearch(event) {
         this.searchInventory = event;
-        this.getInventory(this.pageIndex, this.pageSize, this.filter, this.searchInventory);
+        this.getInventory(this.pageIndex, this.pageSize, this.filter, this.searchInventory, true);
     }
     openSellInventoryModal(data) {
         this.tryingToSellInventory = JSON.parse(JSON.stringify(data));
@@ -1426,6 +1434,22 @@ class InventoryComponent {
             },
         });
     }
+    returnInventoryById(inventoryCode) {
+        this.control.updateInventory(inventoryCode, { isReturned: true }).subscribe({
+            next: (res) => {
+                if (res.code) {
+                    this.ngOnInit();
+                    return this.control.openNotification(res.message);
+                }
+                else {
+                    return this.control.openNotification(res.message, "error");
+                }
+            },
+            error: ({ error: res }) => {
+                return this.control.openNotification(res.message, "error");
+            },
+        });
+    }
     copyText(textToCopy) {
         this.clipboard.copy(textToCopy);
     }
@@ -1443,7 +1467,7 @@ class InventoryComponent {
     }
 }
 InventoryComponent.ɵfac = function InventoryComponent_Factory(t) { return new (t || InventoryComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_12__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_services_api_service__WEBPACK_IMPORTED_MODULE_2__.APIService), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_cdk_clipboard__WEBPACK_IMPORTED_MODULE_13__.Clipboard), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](ng_zorro_antd_modal__WEBPACK_IMPORTED_MODULE_14__.NzModalService)); };
-InventoryComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({ type: InventoryComponent, selectors: [["app-inventory"]], decls: 62, vars: 24, consts: [[1, "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8"], [1, "col-span-1", "p-6", "bg-card", "rounded-lg"], [1, "font-bold", "text-lg", "mb-3"], [1, "mb-3"], [1, "mb-6"], ["nzSize", "large", 1, "rounded-lg", 3, "nzSuffix"], ["type", "text", "nz-input", "", "placeholder", "search for item", 3, "ngModel", "ngModelChange"], ["suffixTemplate0", ""], [1, "bg-card", "p-6", "rounded-lg", "my-6", "card-container"], ["nzCentered", "", "nzType", "card"], [3, "nzTitle"], [4, "ngIf"], [1, "col-span-2", "h-full", "bg-card", "p-6", "rounded-lg"], [1, "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8", "mb-6"], [1, "col-span-2"], ["nzSize", "large", "nzPlaceHolder", "Select Medicine", "nzAllowClear", "", "nzShowSearch", "", "nzServerSearch", "", 1, "w-full", "mb-3", 3, "ngModel", "ngModelChange", "nzOnSearch"], [4, "ngFor", "ngForOf"], ["nzDisabled", "", "nzCustomContent", "", 4, "ngIf"], [1, "flex", "justify-between"], ["nz-tooltip", "", "nzTooltipTitle", "Date of Purchase", "nzSize", "large", 1, "w-full", 3, "ngModel", "ngModelChange"], [1, "w-4"], ["nz-tooltip", "", "nzTooltipTitle", "Expiry Date", "nzSize", "large", 1, "w-full", 3, "ngModel", "ngModelChange"], [1, "col-span-1"], ["nz-button", "", "nzType", "primary", "nzSize", "large", 1, "flex", "w-full", "justify-center", "items-center", "mb-3", 3, "click"], [1, "w-full", "justify-between", "flex"], ["nz-button", "", "nzType", "default", "nzSize", "large", 1, "w-4/5", 3, "click"], ["nz-tooltip", "", "nzTooltipTitle", "Reset", "nz-button", "", "nzType", "default", "nzSize", "large", 3, "click"], ["nz-icon", "", "nzType", "rest", "nzTheme", "outline"], ["nzTableLayout", "fixed", 1, "h-full", 3, "nzData", "nzFrontPagination", "nzLoading", "nzTotal", "nzPageSize", "nzPageIndex", "nzQueryParams"], ["nzTable", ""], ["nzWidth", "37%"], ["nzWidth", "60px"], ["nzWidth", "45vw", 3, "nzVisible", "nzTitle", "nzContent", "nzFooter", "nzVisibleChange", "nzOnCancel"], ["modalTitleSellInventory", ""], ["modalContentSellInventory", ""], ["modalFooterSellInventory", ""], ["nz-icon", "", "nzType", "search"], ["nzHoverable", "", "class", "m-4", "nz-tooltip", "", "nzTooltipPlacement", "right", 3, "nzTitle", "nzTooltipTitle", 4, "ngFor", "ngForOf"], ["nzHoverable", "", "nz-tooltip", "", "nzTooltipPlacement", "right", 1, "m-4", 3, "nzTitle", "nzTooltipTitle"], ["nz-tooltip", "", "nzTooltipPlacement", "right", 3, "nzTooltipTitle", "click"], ["nzNotFoundImage", "simple", 1, "bg-background", "pb-4", "mt-8"], ["firstTitle", "Last 5 Sales", "secondTitle", "last 5 Sales Amount", 3, "items", "itemsIncome"], [3, "nzValue", "nzLabel", 4, "ngIf"], [3, "nzValue", "nzLabel"], ["nzDisabled", "", "nzCustomContent", ""], ["nz-icon", "", "nzType", "loading", 1, "loading-icon"], ["nzEllipsis", "", "nz-tooltip", "", 3, "nzTooltipTitle"], [1, "text-center"], ["nz-button", "", "nzType", "primary", "nzSize", "small", 1, "mt-1", 3, "click"], ["nz-icon", "", "nzType", "shopping-cart", "nzTheme", "outline"], [1, "more-action", 3, "nzExpand", "nzExpandChange"], [3, "nzExpand"], ["nzHoverable", "", 1, "h-40"], ["deleteInventory", ""], [3, "nzTitle", "nzExtra"], ["nzTitle", "Bought Quantity"], ["nzTitle", "Date of Purchase"], ["nzTitle", "Batch Code"], ["nzTitle", "Current Quantity"], ["nzTitle", "Date of Expiry"], ["nzTitle", "Expires In"], ["nz-button", "", "nzDanger", "", "nzSize", "small", "nz-tooltip", "", "nzTooltipTitle", "Delete", 3, "click"], ["nz-icon", "", "nzType", "delete"], [3, "nzColumn", "nzTitle"], ["nzTitle", "Sell Quantity"], ["nz-form", "", 3, "nzLayout", "formGroup", "ngSubmit"], ["nzErrorTip", "Invalid Value"], ["nzPrefixIcon", "pie-chart"], ["formControlName", "saleQuantity", "nz-input", "", "placeholder", "Sell Quantity"], ["nzTitle", "Sell Price"], ["nzPrefixIcon", "money-collect"], ["formControlName", "salePrice", "nz-input", "", "placeholder", "Sell Price"], ["nz-button", "", "nzType", "default", 3, "click"], ["nz-button", "", "nzType", "primary", 3, "click"]], template: function InventoryComponent_Template(rf, ctx) { if (rf & 1) {
+InventoryComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({ type: InventoryComponent, selectors: [["app-inventory"]], decls: 62, vars: 24, consts: [[1, "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8"], [1, "col-span-1", "p-6", "bg-card", "rounded-lg"], [1, "font-bold", "text-lg", "mb-3"], [1, "mb-3"], [1, "mb-6"], ["nzSize", "large", 1, "rounded-lg", 3, "nzSuffix"], ["type", "text", "nz-input", "", "placeholder", "search for item", 3, "ngModel", "ngModelChange"], ["suffixTemplate0", ""], [1, "bg-card", "p-6", "rounded-lg", "my-6", "card-container"], ["nzCentered", "", "nzType", "card"], [3, "nzTitle"], [4, "ngIf"], [1, "col-span-2", "h-full", "bg-card", "p-6", "rounded-lg"], [1, "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8", "mb-6"], [1, "col-span-2"], ["nzSize", "large", "nzPlaceHolder", "Select Medicine", "nzAllowClear", "", "nzShowSearch", "", "nzServerSearch", "", 1, "w-full", "mb-3", 3, "ngModel", "ngModelChange", "nzOnSearch"], [4, "ngFor", "ngForOf"], ["nzDisabled", "", "nzCustomContent", "", 4, "ngIf"], [1, "flex", "justify-between"], ["nz-tooltip", "", "nzTooltipTitle", "Date of Purchase", "nzSize", "large", 1, "w-full", 3, "ngModel", "ngModelChange"], [1, "w-4"], ["nz-tooltip", "", "nzTooltipTitle", "Expiry Date", "nzSize", "large", 1, "w-full", 3, "ngModel", "ngModelChange"], [1, "col-span-1"], ["nz-button", "", "nzType", "primary", "nzSize", "large", 1, "flex", "w-full", "justify-center", "items-center", "mb-3", 3, "click"], [1, "w-full", "justify-between", "flex"], ["nz-button", "", "nzType", "default", "nzSize", "large", 1, "w-4/5", 3, "click"], ["nz-tooltip", "", "nzTooltipTitle", "Reset", "nz-button", "", "nzType", "default", "nzSize", "large", 3, "click"], ["nz-icon", "", "nzType", "rest", "nzTheme", "outline"], ["nzTableLayout", "fixed", 1, "h-full", 3, "nzData", "nzFrontPagination", "nzLoading", "nzTotal", "nzPageSize", "nzPageIndex", "nzQueryParams"], ["nzTable", ""], ["nzWidth", "37%"], ["nzWidth", "60px"], ["nzWidth", "45vw", 3, "nzVisible", "nzTitle", "nzContent", "nzFooter", "nzVisibleChange", "nzOnCancel"], ["modalTitleSellInventory", ""], ["modalContentSellInventory", ""], ["modalFooterSellInventory", ""], ["nz-icon", "", "nzType", "search"], ["nzHoverable", "", "class", "m-4", "nz-tooltip", "", "nzTooltipPlacement", "right", 3, "nzTitle", "nzTooltipTitle", 4, "ngFor", "ngForOf"], ["nzHoverable", "", "nz-tooltip", "", "nzTooltipPlacement", "right", 1, "m-4", 3, "nzTitle", "nzTooltipTitle"], ["nz-tooltip", "", "nzTooltipPlacement", "right", 3, "nzTooltipTitle", "click"], ["nzNotFoundImage", "simple", 1, "bg-background", "pb-4", "mt-8"], ["firstTitle", "Last 5 Sales", "secondTitle", "last 5 Sales Amount", 3, "items", "itemsIncome"], [3, "nzValue", "nzLabel", 4, "ngIf"], [3, "nzValue", "nzLabel"], ["nzDisabled", "", "nzCustomContent", ""], ["nz-icon", "", "nzType", "loading", 1, "loading-icon"], ["nzEllipsis", "", "nz-tooltip", "", 3, "nzTooltipTitle"], [1, "text-center"], ["nz-button", "", "nzType", "primary", "nzSize", "small", 1, "mt-1", 3, "click"], ["nz-icon", "", "nzType", "shopping-cart", "nzTheme", "outline"], [1, "more-action", 3, "nzExpand", "nzExpandChange"], [3, "nzExpand"], ["nzHoverable", "", 1, "h-40"], ["deleteInventory", ""], [3, "nzTitle", "nzExtra"], ["nzTitle", "Bought Quantity"], ["nzTitle", "Date of Purchase"], ["nzTitle", "Batch Code"], ["nzTitle", "Current Quantity"], ["nzTitle", "Date of Expiry"], ["nzTitle", "Expires In"], ["nz-popconfirm", "", "nzPopconfirmTitle", "Are you sure?", "nzIcon", "warning", "nz-button", "", "nzSize", "small", "nz-tooltip", "", "nzTooltipTitle", "Return", 1, "mr-2", 3, "nzOnConfirm"], ["nz-icon", "", "nzType", "retweet"], ["nz-popconfirm", "", "nzPopconfirmTitle", "Are you sure?", "nzIcon", "warning", "nz-button", "", "nzDanger", "", "nzSize", "small", "nz-tooltip", "", "nzTooltipTitle", "Delete", 3, "nzOnConfirm"], ["nz-icon", "", "nzType", "delete"], [3, "nzColumn", "nzTitle"], ["nzTitle", "Sell Quantity"], ["nz-form", "", 3, "nzLayout", "formGroup", "ngSubmit"], ["nzErrorTip", "Invalid Value"], ["nzPrefixIcon", "pie-chart"], ["formControlName", "saleQuantity", "nz-input", "", "placeholder", "Sell Quantity"], ["nzTitle", "Sell Price"], ["nzPrefixIcon", "money-collect"], ["formControlName", "salePrice", "nz-input", "", "placeholder", "Sell Price"], ["nz-button", "", "nzType", "default", 3, "click"], ["nz-button", "", "nzType", "primary", 3, "click"]], template: function InventoryComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 0)(1, "aside", 1)(2, "div")(3, "h1", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](4, "Search for items");
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -1553,7 +1577,7 @@ InventoryComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngForOf", _r8.data);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("nzVisible", ctx.isSellInventoryVisible)("nzTitle", _r10)("nzContent", _r12)("nzFooter", _r14);
-    } }, directives: [ng_zorro_antd_core_transition_patch__WEBPACK_IMPORTED_MODULE_15__["ɵNzTransitionPatchDirective"], ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_16__.NzInputGroupComponent, ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_16__.NzInputGroupWhitSuffixOrPrefixDirective, ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_16__.NzInputDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgModel, ng_zorro_antd_icon__WEBPACK_IMPORTED_MODULE_17__.NzIconDirective, ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_18__.NzTabSetComponent, ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_18__.NzTabComponent, _angular_common__WEBPACK_IMPORTED_MODULE_19__.NgIf, _angular_common__WEBPACK_IMPORTED_MODULE_19__.NgForOf, ng_zorro_antd_card__WEBPACK_IMPORTED_MODULE_20__.NzCardComponent, ng_zorro_antd_tooltip__WEBPACK_IMPORTED_MODULE_21__.NzTooltipDirective, ng_zorro_antd_empty__WEBPACK_IMPORTED_MODULE_22__.NzEmptyComponent, _component_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_3__.TabsComponent, ng_zorro_antd_select__WEBPACK_IMPORTED_MODULE_23__.NzSelectComponent, ng_zorro_antd_select__WEBPACK_IMPORTED_MODULE_23__.NzOptionComponent, ng_zorro_antd_date_picker__WEBPACK_IMPORTED_MODULE_24__.NzDatePickerComponent, ng_zorro_antd_date_picker__WEBPACK_IMPORTED_MODULE_24__.NzRangePickerComponent, ng_zorro_antd_button__WEBPACK_IMPORTED_MODULE_25__.NzButtonComponent, ng_zorro_antd_core_wave__WEBPACK_IMPORTED_MODULE_26__.NzWaveDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTableComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTheadComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTrDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTableCellDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzThMeasureDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTbodyComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzCellEllipsisDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTdAddOnComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTrExpandDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTableFixedRowComponent, ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_28__.NzDescriptionsComponent, ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_28__.NzDescriptionsItemComponent, ng_zorro_antd_modal__WEBPACK_IMPORTED_MODULE_14__.NzModalComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgControlStatusGroup, ng_zorro_antd_form__WEBPACK_IMPORTED_MODULE_29__.NzFormDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormGroupDirective, ng_zorro_antd_grid__WEBPACK_IMPORTED_MODULE_30__.NzRowDirective, ng_zorro_antd_form__WEBPACK_IMPORTED_MODULE_29__.NzFormItemComponent, ng_zorro_antd_grid__WEBPACK_IMPORTED_MODULE_30__.NzColDirective, ng_zorro_antd_form__WEBPACK_IMPORTED_MODULE_29__.NzFormControlComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormControlName], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_19__.DatePipe, _angular_common__WEBPACK_IMPORTED_MODULE_19__.SlicePipe], styles: [".card-container[_ngcontent-%COMP%] {\r\n  height: 875px;\r\n  overflow-y: auto;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImludmVudG9yeS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7R0FHRzs7QUFFSDtFQUNFLGFBQWE7RUFDYixnQkFBZ0I7QUFDbEIiLCJmaWxlIjoiaW52ZW50b3J5LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiAuY2FyZC1jb250YWluZXIgOjpuZy1kZWVwID4gLmFudC10YWJzLWNhcmQgLmFudC10YWJzLWNvbnRlbnQge1xyXG4gIGhlaWdodDogNjR2aDtcclxuICBvdmVyZmxvdy15OiBhdXRvO1xyXG59ICovXHJcblxyXG4uY2FyZC1jb250YWluZXIge1xyXG4gIGhlaWdodDogODc1cHg7XHJcbiAgb3ZlcmZsb3cteTogYXV0bztcclxufVxyXG4iXX0= */"] });
+    } }, directives: [ng_zorro_antd_core_transition_patch__WEBPACK_IMPORTED_MODULE_15__["ɵNzTransitionPatchDirective"], ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_16__.NzInputGroupComponent, ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_16__.NzInputGroupWhitSuffixOrPrefixDirective, ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_16__.NzInputDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgModel, ng_zorro_antd_icon__WEBPACK_IMPORTED_MODULE_17__.NzIconDirective, ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_18__.NzTabSetComponent, ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_18__.NzTabComponent, _angular_common__WEBPACK_IMPORTED_MODULE_19__.NgIf, _angular_common__WEBPACK_IMPORTED_MODULE_19__.NgForOf, ng_zorro_antd_card__WEBPACK_IMPORTED_MODULE_20__.NzCardComponent, ng_zorro_antd_tooltip__WEBPACK_IMPORTED_MODULE_21__.NzTooltipDirective, ng_zorro_antd_empty__WEBPACK_IMPORTED_MODULE_22__.NzEmptyComponent, _component_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_3__.TabsComponent, ng_zorro_antd_select__WEBPACK_IMPORTED_MODULE_23__.NzSelectComponent, ng_zorro_antd_select__WEBPACK_IMPORTED_MODULE_23__.NzOptionComponent, ng_zorro_antd_date_picker__WEBPACK_IMPORTED_MODULE_24__.NzDatePickerComponent, ng_zorro_antd_date_picker__WEBPACK_IMPORTED_MODULE_24__.NzRangePickerComponent, ng_zorro_antd_button__WEBPACK_IMPORTED_MODULE_25__.NzButtonComponent, ng_zorro_antd_core_wave__WEBPACK_IMPORTED_MODULE_26__.NzWaveDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTableComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTheadComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTrDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTableCellDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzThMeasureDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTbodyComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzCellEllipsisDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTdAddOnComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTrExpandDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_27__.NzTableFixedRowComponent, ng_zorro_antd_popconfirm__WEBPACK_IMPORTED_MODULE_28__.NzPopconfirmDirective, ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_29__.NzDescriptionsComponent, ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_29__.NzDescriptionsItemComponent, ng_zorro_antd_modal__WEBPACK_IMPORTED_MODULE_14__.NzModalComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgControlStatusGroup, ng_zorro_antd_form__WEBPACK_IMPORTED_MODULE_30__.NzFormDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormGroupDirective, ng_zorro_antd_grid__WEBPACK_IMPORTED_MODULE_31__.NzRowDirective, ng_zorro_antd_form__WEBPACK_IMPORTED_MODULE_30__.NzFormItemComponent, ng_zorro_antd_grid__WEBPACK_IMPORTED_MODULE_31__.NzColDirective, ng_zorro_antd_form__WEBPACK_IMPORTED_MODULE_30__.NzFormControlComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormControlName], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_19__.DatePipe, _angular_common__WEBPACK_IMPORTED_MODULE_19__.SlicePipe], styles: [".card-container[_ngcontent-%COMP%] {\r\n  height: 875px;\r\n  overflow-y: auto;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImludmVudG9yeS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7R0FHRzs7QUFFSDtFQUNFLGFBQWE7RUFDYixnQkFBZ0I7QUFDbEIiLCJmaWxlIjoiaW52ZW50b3J5LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiAuY2FyZC1jb250YWluZXIgOjpuZy1kZWVwID4gLmFudC10YWJzLWNhcmQgLmFudC10YWJzLWNvbnRlbnQge1xyXG4gIGhlaWdodDogNjR2aDtcclxuICBvdmVyZmxvdy15OiBhdXRvO1xyXG59ICovXHJcblxyXG4uY2FyZC1jb250YWluZXIge1xyXG4gIGhlaWdodDogODc1cHg7XHJcbiAgb3ZlcmZsb3cteTogYXV0bztcclxufVxyXG4iXX0= */"] });
 
 
 /***/ }),
@@ -1619,22 +1643,21 @@ class MedicineComponent {
     constructor(control) {
         this.control = control;
         this.gridStyle = {
-            width: '33.3333333%',
-            textAlign: 'center',
+            width: "33.3333333%",
+            textAlign: "center",
         };
         this.medicine = [];
         this.loadingMedicine = true;
         this.pageSize = 100;
         this.pageIndex = 1;
         this.totalMedicine = 1;
-        this.searchMedicine = '';
+        this.searchMedicine = "";
     }
     ngOnInit() {
         this.getMedicine(this.pageIndex, this.pageSize, this.searchMedicine);
     }
     scrollHandler() {
-        const pos = (document.documentElement.scrollTop || document.body.scrollTop) +
-            document.documentElement.offsetHeight;
+        const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
         const max = document.documentElement.scrollHeight;
         const currentPos = pos + 20;
         if (max < currentPos) {
@@ -1642,8 +1665,8 @@ class MedicineComponent {
             this.getMedicine(this.pageIndex, this.pageSize, this.searchMedicine);
         }
     }
-    getMedicine(page, limit, search) {
-        this.control.getMedicine({ page, limit, search }).subscribe({
+    getMedicine(page, limit, search, scroll) {
+        this.control.getMedicine({ page, limit, search, scroll }).subscribe({
             next: (res) => {
                 this.loadingMedicine = false;
                 if (res.code) {
@@ -1656,18 +1679,18 @@ class MedicineComponent {
                     }
                 }
                 else {
-                    return this.control.openNotification(res.message, 'error');
+                    return this.control.openNotification(res.message, "error");
                 }
             },
             error: ({ error: res }) => {
-                return this.control.openNotification(res.message, 'error');
+                return this.control.openNotification(res.message, "error");
             },
         });
     }
     onMedicineSearch(event) {
         this.searchMedicine = event;
         this.pageIndex = 1;
-        this.getMedicine(this.pageIndex, this.pageSize, this.searchMedicine);
+        this.getMedicine(this.pageIndex, this.pageSize, this.searchMedicine, true);
     }
 }
 MedicineComponent.ɵfac = function MedicineComponent_Factory(t) { return new (t || MedicineComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_services_api_service__WEBPACK_IMPORTED_MODULE_0__.APIService)); };
@@ -1725,7 +1748,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng_zorro_antd_date_picker__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ng-zorro-antd/date-picker */ 6188);
 /* harmony import */ var ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ng-zorro-antd/table */ 3134);
 /* harmony import */ var ng_zorro_antd_card__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ng-zorro-antd/card */ 2257);
-/* harmony import */ var ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ng-zorro-antd/descriptions */ 3698);
+/* harmony import */ var ng_zorro_antd_popconfirm__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ng-zorro-antd/popconfirm */ 5174);
+/* harmony import */ var ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ng-zorro-antd/descriptions */ 3698);
+
 
 
 
@@ -1773,7 +1798,7 @@ function SaleComponent_nz_option_25_Template(rf, ctx) { if (rf & 1) {
 function SaleComponent_ng_container_48_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     const _r14 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "button", 49);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function SaleComponent_ng_container_48_ng_template_14_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r14); const data_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]().$implicit; const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r12.deleteSaleById(data_r9.saleCode); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("nzOnConfirm", function SaleComponent_ng_container_48_ng_template_14_Template_button_nzOnConfirm_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r14); const data_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]().$implicit; const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r12.deleteSaleById(data_r9.saleCode); });
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](1, "i", 50);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } }
@@ -1904,8 +1929,8 @@ class SaleComponent {
             this.isLoading = false;
         });
     }
-    getSale(page, limit, filter, search) {
-        this.control.getSale(Object.assign(Object.assign({ page, limit }, filter), { search })).subscribe({
+    getSale(page, limit, filter, search, scroll) {
+        this.control.getSale(Object.assign(Object.assign({ page, limit }, filter), { search, scroll })).subscribe({
             next: (res) => {
                 this.loadingSale = false;
                 if (res.code) {
@@ -2025,7 +2050,7 @@ class SaleComponent {
     }
     onSaleSearch(event) {
         this.searchSale = event;
-        this.getSale(this.pageIndex, this.pageSize, this.filter, this.searchSale);
+        this.getSale(this.pageIndex, this.pageSize, this.filter, this.searchSale, true);
     }
     deleteSaleById(saleCode) {
         this.control.updateSale(saleCode, { isDeleted: true }).subscribe({
@@ -2045,7 +2070,7 @@ class SaleComponent {
     }
 }
 SaleComponent.ɵfac = function SaleComponent_Factory(t) { return new (t || SaleComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_10__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](src_app_services_api_service__WEBPACK_IMPORTED_MODULE_1__.APIService), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormBuilder)); };
-SaleComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({ type: SaleComponent, selectors: [["app-sale"]], decls: 49, vars: 22, consts: [[1, "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8"], [1, "col-span-1", "p-6", "bg-card", "rounded-lg"], [1, "font-bold", "text-lg", "mb-3"], [1, "mb-3"], [1, "mb-6"], ["nzSize", "large", 1, "rounded-lg", 3, "nzSuffix"], ["type", "text", "nz-input", "", "placeholder", "search for item", 3, "ngModel", "ngModelChange"], ["suffixTemplate0", ""], [1, "bg-card", "p-6", "rounded-lg", "my-6", "card-container"], ["nzCentered", "", "nzType", "card"], [3, "nzTitle"], ["firstTitle", "Today's Sales", "secondTitle", "Today's Amount", 3, "items", "itemsIncome"], ["firstTitle", "Last 7 Days Sales", "secondTitle", "last 7 Days Amount", 3, "items", "itemsIncome"], ["firstTitle", "Last 30 Days Sales", "secondTitle", "last 30 Days Amount", 3, "items", "itemsIncome"], [1, "col-span-2", "h-full", "bg-card", "p-6", "rounded-lg"], [1, "col-span-2"], ["nzSize", "large", "nzPlaceHolder", "Select Medicine", "nzAllowClear", "", "nzShowSearch", "", "nzServerSearch", "", 1, "w-full", "mb-3", 3, "ngModel", "ngModelChange", "nzOnSearch"], [4, "ngFor", "ngForOf"], ["nzDisabled", "", "nzCustomContent", "", 4, "ngIf"], [1, "col-span-1"], [1, "w-full", "justify-between", "flex"], ["nz-button", "", "nzType", "default", "nzSize", "large", 1, "w-4/5", 3, "click"], ["nz-tooltip", "", "nzTooltipTitle", "Reset", "nz-button", "", "nzType", "default", "nzSize", "large", 3, "click"], ["nz-icon", "", "nzType", "rest", "nzTheme", "outline"], [1, "flex", "justify-between", "mb-6"], ["nz-tooltip", "", "nzTooltipTitle", "Sold Date", "nzSize", "large", 1, "w-full", 3, "ngModel", "ngModelChange"], ["nzTableLayout", "fixed", 1, "h-full", 3, "nzData", "nzFrontPagination", "nzLoading", "nzTotal", "nzPageSize", "nzPageIndex", "nzQueryParams"], ["nzTable", ""], ["nzWidth", "30%"], ["nzWidth", "28%"], ["nzWidth", "180px"], ["nzWidth", "60px"], ["nz-icon", "", "nzType", "search"], [3, "nzValue", "nzLabel", 4, "ngIf"], [3, "nzValue", "nzLabel"], ["nzDisabled", "", "nzCustomContent", ""], ["nz-icon", "", "nzType", "loading", 1, "loading-icon"], ["nzEllipsis", "", "nz-tooltip", "", 3, "nzTooltipTitle"], [1, "more-action", 3, "nzExpand", "nzExpandChange"], [3, "nzExpand"], ["nzHoverable", "", 1, "h-40"], ["deleteSale", ""], [3, "nzTitle", "nzExtra"], ["nzTitle", "Sold Quantity"], ["nzTitle", "Sold At"], ["nzTitle", "Invoice No."], ["nzTitle", "Batch Code"], ["nzTitle", "Date of Expiry"], ["nzTitle", "Sell Price"], ["nz-button", "", "nzDanger", "", "nzSize", "small", "nz-tooltip", "", "nzTooltipTitle", "Delete", 3, "click"], ["nz-icon", "", "nzType", "delete"]], template: function SaleComponent_Template(rf, ctx) { if (rf & 1) {
+SaleComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({ type: SaleComponent, selectors: [["app-sale"]], decls: 49, vars: 22, consts: [[1, "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8"], [1, "col-span-1", "p-6", "bg-card", "rounded-lg"], [1, "font-bold", "text-lg", "mb-3"], [1, "mb-3"], [1, "mb-6"], ["nzSize", "large", 1, "rounded-lg", 3, "nzSuffix"], ["type", "text", "nz-input", "", "placeholder", "search for item", 3, "ngModel", "ngModelChange"], ["suffixTemplate0", ""], [1, "bg-card", "p-6", "rounded-lg", "my-6", "card-container"], ["nzCentered", "", "nzType", "card"], [3, "nzTitle"], ["firstTitle", "Today's Sales", "secondTitle", "Today's Amount", 3, "items", "itemsIncome"], ["firstTitle", "Last 7 Days Sales", "secondTitle", "last 7 Days Amount", 3, "items", "itemsIncome"], ["firstTitle", "Last 30 Days Sales", "secondTitle", "last 30 Days Amount", 3, "items", "itemsIncome"], [1, "col-span-2", "h-full", "bg-card", "p-6", "rounded-lg"], [1, "col-span-2"], ["nzSize", "large", "nzPlaceHolder", "Select Medicine", "nzAllowClear", "", "nzShowSearch", "", "nzServerSearch", "", 1, "w-full", "mb-3", 3, "ngModel", "ngModelChange", "nzOnSearch"], [4, "ngFor", "ngForOf"], ["nzDisabled", "", "nzCustomContent", "", 4, "ngIf"], [1, "col-span-1"], [1, "w-full", "justify-between", "flex"], ["nz-button", "", "nzType", "default", "nzSize", "large", 1, "w-4/5", 3, "click"], ["nz-tooltip", "", "nzTooltipTitle", "Reset", "nz-button", "", "nzType", "default", "nzSize", "large", 3, "click"], ["nz-icon", "", "nzType", "rest", "nzTheme", "outline"], [1, "flex", "justify-between", "mb-6"], ["nz-tooltip", "", "nzTooltipTitle", "Sold Date", "nzSize", "large", 1, "w-full", 3, "ngModel", "ngModelChange"], ["nzTableLayout", "fixed", 1, "h-full", 3, "nzData", "nzFrontPagination", "nzLoading", "nzTotal", "nzPageSize", "nzPageIndex", "nzQueryParams"], ["nzTable", ""], ["nzWidth", "30%"], ["nzWidth", "28%"], ["nzWidth", "180px"], ["nzWidth", "60px"], ["nz-icon", "", "nzType", "search"], [3, "nzValue", "nzLabel", 4, "ngIf"], [3, "nzValue", "nzLabel"], ["nzDisabled", "", "nzCustomContent", ""], ["nz-icon", "", "nzType", "loading", 1, "loading-icon"], ["nzEllipsis", "", "nz-tooltip", "", 3, "nzTooltipTitle"], [1, "more-action", 3, "nzExpand", "nzExpandChange"], [3, "nzExpand"], ["nzHoverable", "", 1, "h-40"], ["deleteSale", ""], [3, "nzTitle", "nzExtra"], ["nzTitle", "Sold Quantity"], ["nzTitle", "Sold At"], ["nzTitle", "Invoice No."], ["nzTitle", "Batch Code"], ["nzTitle", "Date of Expiry"], ["nzTitle", "Sell Price"], ["nz-popconfirm", "", "nzPopconfirmTitle", "Are you sure?", "nzIcon", "warning", "nz-button", "", "nzDanger", "", "nzSize", "small", "nz-tooltip", "", "nzTooltipTitle", "Delete", 3, "nzOnConfirm"], ["nz-icon", "", "nzType", "delete"]], template: function SaleComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0)(1, "aside", 1)(2, "div")(3, "h1", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](4, "Search for items");
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
@@ -2132,7 +2157,7 @@ SaleComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("nzData", ctx.sale)("nzFrontPagination", false)("nzLoading", ctx.loadingSale)("nzTotal", ctx.totalSale)("nzPageSize", ctx.pageSize)("nzPageIndex", ctx.pageIndex);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](14);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngForOf", _r4.data);
-    } }, directives: [ng_zorro_antd_core_transition_patch__WEBPACK_IMPORTED_MODULE_12__["ɵNzTransitionPatchDirective"], ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_13__.NzInputGroupComponent, ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_13__.NzInputGroupWhitSuffixOrPrefixDirective, ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_13__.NzInputDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgModel, ng_zorro_antd_icon__WEBPACK_IMPORTED_MODULE_14__.NzIconDirective, ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_15__.NzTabSetComponent, ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_15__.NzTabComponent, _component_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_2__.TabsComponent, ng_zorro_antd_select__WEBPACK_IMPORTED_MODULE_16__.NzSelectComponent, _angular_common__WEBPACK_IMPORTED_MODULE_17__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_17__.NgIf, ng_zorro_antd_select__WEBPACK_IMPORTED_MODULE_16__.NzOptionComponent, ng_zorro_antd_button__WEBPACK_IMPORTED_MODULE_18__.NzButtonComponent, ng_zorro_antd_core_wave__WEBPACK_IMPORTED_MODULE_19__.NzWaveDirective, ng_zorro_antd_tooltip__WEBPACK_IMPORTED_MODULE_20__.NzTooltipDirective, ng_zorro_antd_date_picker__WEBPACK_IMPORTED_MODULE_21__.NzDatePickerComponent, ng_zorro_antd_date_picker__WEBPACK_IMPORTED_MODULE_21__.NzRangePickerComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTableComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTheadComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTrDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTableCellDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzThMeasureDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTbodyComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzCellEllipsisDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTdAddOnComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTrExpandDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTableFixedRowComponent, ng_zorro_antd_card__WEBPACK_IMPORTED_MODULE_23__.NzCardComponent, ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_24__.NzDescriptionsComponent, ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_24__.NzDescriptionsItemComponent], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_17__.DatePipe], styles: [".card-container[_ngcontent-%COMP%] {\r\n  height: 875px;\r\n  overflow-y: auto;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNhbGUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7O0dBR0c7O0FBRUg7RUFDRSxhQUFhO0VBQ2IsZ0JBQWdCO0FBQ2xCIiwiZmlsZSI6InNhbGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi8qIC5jYXJkLWNvbnRhaW5lciA6Om5nLWRlZXAgPiAuYW50LXRhYnMtY2FyZCAuYW50LXRhYnMtY29udGVudCB7XHJcbiAgaGVpZ2h0OiA2NHZoO1xyXG4gIG92ZXJmbG93LXk6IGF1dG87XHJcbn0gKi9cclxuXHJcbi5jYXJkLWNvbnRhaW5lciB7XHJcbiAgaGVpZ2h0OiA4NzVweDtcclxuICBvdmVyZmxvdy15OiBhdXRvO1xyXG59XHJcbiJdfQ== */"] });
+    } }, directives: [ng_zorro_antd_core_transition_patch__WEBPACK_IMPORTED_MODULE_12__["ɵNzTransitionPatchDirective"], ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_13__.NzInputGroupComponent, ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_13__.NzInputGroupWhitSuffixOrPrefixDirective, ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_13__.NzInputDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgModel, ng_zorro_antd_icon__WEBPACK_IMPORTED_MODULE_14__.NzIconDirective, ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_15__.NzTabSetComponent, ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_15__.NzTabComponent, _component_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_2__.TabsComponent, ng_zorro_antd_select__WEBPACK_IMPORTED_MODULE_16__.NzSelectComponent, _angular_common__WEBPACK_IMPORTED_MODULE_17__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_17__.NgIf, ng_zorro_antd_select__WEBPACK_IMPORTED_MODULE_16__.NzOptionComponent, ng_zorro_antd_button__WEBPACK_IMPORTED_MODULE_18__.NzButtonComponent, ng_zorro_antd_core_wave__WEBPACK_IMPORTED_MODULE_19__.NzWaveDirective, ng_zorro_antd_tooltip__WEBPACK_IMPORTED_MODULE_20__.NzTooltipDirective, ng_zorro_antd_date_picker__WEBPACK_IMPORTED_MODULE_21__.NzDatePickerComponent, ng_zorro_antd_date_picker__WEBPACK_IMPORTED_MODULE_21__.NzRangePickerComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTableComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTheadComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTrDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTableCellDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzThMeasureDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTbodyComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzCellEllipsisDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTdAddOnComponent, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTrExpandDirective, ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_22__.NzTableFixedRowComponent, ng_zorro_antd_card__WEBPACK_IMPORTED_MODULE_23__.NzCardComponent, ng_zorro_antd_popconfirm__WEBPACK_IMPORTED_MODULE_24__.NzPopconfirmDirective, ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_25__.NzDescriptionsComponent, ng_zorro_antd_descriptions__WEBPACK_IMPORTED_MODULE_25__.NzDescriptionsItemComponent], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_17__.DatePipe], styles: [".card-container[_ngcontent-%COMP%] {\r\n  height: 875px;\r\n  overflow-y: auto;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNhbGUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7O0dBR0c7O0FBRUg7RUFDRSxhQUFhO0VBQ2IsZ0JBQWdCO0FBQ2xCIiwiZmlsZSI6InNhbGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi8qIC5jYXJkLWNvbnRhaW5lciA6Om5nLWRlZXAgPiAuYW50LXRhYnMtY2FyZCAuYW50LXRhYnMtY29udGVudCB7XHJcbiAgaGVpZ2h0OiA2NHZoO1xyXG4gIG92ZXJmbG93LXk6IGF1dG87XHJcbn0gKi9cclxuXHJcbi5jYXJkLWNvbnRhaW5lciB7XHJcbiAgaGVpZ2h0OiA4NzVweDtcclxuICBvdmVyZmxvdy15OiBhdXRvO1xyXG59XHJcbiJdfQ== */"] });
 
 
 /***/ }),
