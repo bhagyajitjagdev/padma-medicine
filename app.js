@@ -84,4 +84,4 @@ setInterval(() => {
   if (folders.length > 30) {
     findRemoveSync("./backup", { dir: "*", age: { seconds: 2630000 } }); // 2630000 => 1 month
   }
-}, 10000);
+}, 60000);

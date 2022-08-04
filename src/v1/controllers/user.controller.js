@@ -33,7 +33,7 @@ exports.createUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    const { userCode, firstName, lastName, userName, email, role, isApproved, isDeleted } = req.body;
+    const { userCode, firstName, lastName, userName, email, role, isDeleted } = req.body;
 
     const body = {};
 
@@ -43,7 +43,6 @@ exports.updateUser = async (req, res) => {
     if (email) body.email = email;
 
     if (req.payload.role === "ADMIN" && role) body.role = role;
-    if (req.body.hasOwnProperty("isApproved")) body.isApproved = isApproved;
     if (req.body.hasOwnProperty("isDeleted")) body.isDeleted = isDeleted;
 
     if (!Object.keys(body).length) return ERROR(res, null, "Nothing to update");
